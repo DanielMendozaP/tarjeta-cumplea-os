@@ -417,304 +417,6 @@ if (esCelular) {
 }
 
 
-/* =====================================================
-   CORAZONES DEL ÁRBOL
-===================================================== */
-
-const grupoCorazones =
-    document.getElementById(
-        "grupo-corazones"
-    );
-
-
-const coloresCorazon = [
-
-    "#ff1744",
-    "#ff3158",
-    "#ff5271",
-    "#ff7189",
-    "#e60046",
-    "#d91654",
-    "#ff8da0",
-    "#ffb0bd"
-];
-
-
-/*
-    Esta función determina la forma
-    general de la copa.
-
-    No hacemos simplemente un rectángulo
-    lleno de corazones.
-*/
-
-function dentroDeCopa(x, y) {
-
-    const centroX = 250;
-    const centroY = 195;
-
-    const escalaX =
-        (x - centroX) / 172;
-
-    const escalaY =
-        (195 - y) / 150;
-
-    const formula =
-        Math.pow(
-            escalaX * escalaX
-            +
-            escalaY * escalaY
-            -
-            1,
-            3
-        )
-        -
-        escalaX
-        *
-        escalaX
-        *
-        Math.pow(
-            escalaY,
-            3
-        );
-
-    return (
-        formula <= 0
-        &&
-        y > 25
-        &&
-        y < 355
-    );
-}
-
-
-function crearCorazonesArbol() {
-
-    const namespace =
-        "http://www.w3.org/2000/svg";
-
-
-    const esCelular =
-        window.innerWidth <= 800;
-
-
-    const cantidad =
-        esCelular
-            ? 180
-            : 750;
-
-
-    let creados = 0;
-
-
-    while (creados < cantidad) {
-
-        const x =
-            65 +
-            Math.random() * 370;
-
-
-        const y =
-            30 +
-            Math.random() * 330;
-
-
-        if (!dentroDeCopa(x, y)) {
-            continue;
-        }
-
-
-        const corazon =
-            document.createElementNS(
-                namespace,
-                "text"
-            );
-
-
-        corazon.classList.add(
-            "corazon-arbol"
-        );
-
-
-        corazon.setAttribute(
-            "x",
-            x
-        );
-
-
-        corazon.setAttribute(
-            "y",
-            y
-        );
-
-
-        corazon.setAttribute(
-            "text-anchor",
-            "middle"
-        );
-
-
-        corazon.setAttribute(
-            "dominant-baseline",
-            "middle"
-        );
-
-
-        corazon.textContent =
-            "♥";
-
-
-        const distanciaCentro =
-            Math.abs(
-                x - 250
-            );
-
-
-        const zonaCentral =
-            distanciaCentro < 115
-            &&
-            y > 130;
-
-
-        let tamano;
-
-
-        if (esCelular) {
-
-            /*
-                MÓVIL
-            */
-
-            if (zonaCentral) {
-
-                tamano =
-                    28 +
-                    Math.random() * 18;
-
-            } else {
-
-                const probabilidad =
-                    Math.random();
-
-
-                if (
-                    probabilidad < 0.30
-                ) {
-
-                    tamano =
-                        14 +
-                        Math.random() * 8;
-
-                } else if (
-                    probabilidad < 0.72
-                ) {
-
-                    tamano =
-                        24 +
-                        Math.random() * 12;
-
-                } else {
-
-                    tamano =
-                        36 +
-                        Math.random() * 16;
-                }
-            }
-
-        } else {
-
-            /*
-                PC
-            */
-
-            if (zonaCentral) {
-
-                tamano =
-                    19 +
-                    Math.random() * 18;
-
-            } else {
-
-                const probabilidad =
-                    Math.random();
-
-
-                if (
-                    probabilidad < 0.30
-                ) {
-
-                    tamano =
-                        10 +
-                        Math.random() * 7;
-
-                } else if (
-                    probabilidad < 0.75
-                ) {
-
-                    tamano =
-                        17 +
-                        Math.random() * 9;
-
-                } else {
-
-                    tamano =
-                        26 +
-                        Math.random() * 12;
-                }
-            }
-        }
-
-
-        corazon.setAttribute(
-            "font-size",
-            tamano
-        );
-
-
-        const color =
-            coloresCorazon[
-                Math.floor(
-                    Math.random()
-                    *
-                    coloresCorazon.length
-                )
-            ];
-
-
-        corazon.setAttribute(
-            "fill",
-            color
-        );
-
-
-        const rotacion =
-            -18 +
-            Math.random() * 36;
-
-
-        corazon.style.setProperty(
-            "--rotacion",
-            `${rotacion}deg`
-        );
-
-
-        const retraso =
-            2700 +
-            Math.random() * 3500;
-
-
-        corazon.style.animationDelay =
-            `${retraso}ms`;
-
-
-        grupoCorazones.appendChild(
-            corazon
-        );
-
-
-        creados++;
-    }
-}
 
 /* =====================================================
    INICIO
@@ -749,22 +451,41 @@ setInterval(
    SOLO EN ESCRITORIO
 ===================================================== */
 
-if (window.innerWidth > 800) {
+/* =====================================================
+   LLUVIA DE FRASES
+===================================================== */
 
-    setTimeout(
-        crearFraseCayendo,
-        700
-    );
-
-
-    setInterval(
-        crearFraseCayendo,
-        3000
-    );
-}
+const esCelularFrases =
+    window.innerWidth <= 800;
 
 
-crearCorazonesArbol();
+const intervaloFrases =
+    esCelularFrases
+        ? 5000
+        : 3000;
+
+
+/*
+    Primera frase.
+*/
+
+setTimeout(
+    crearFraseCayendo,
+    esCelularFrases
+        ? 1200
+        : 700
+);
+
+
+/*
+    Frases siguientes.
+*/
+
+setInterval(
+    crearFraseCayendo,
+    intervaloFrases
+);
+
 
 /* =====================================================
    CONFETI DE CORAZONES
@@ -1336,3 +1057,591 @@ setTimeout(
 
 
 
+/* =====================================================
+   PRUEBA CANVAS - VERSIÓN 2.0
+===================================================== */
+
+const canvasCorazones =
+    document.getElementById(
+        "canvas-corazones"
+    );
+
+const contextoCorazones =
+    canvasCorazones.getContext(
+        "2d"
+    );
+
+
+function probarCanvas() {
+
+    const ancho =
+        canvasCorazones.clientWidth;
+
+    const alto =
+        canvasCorazones.clientHeight;
+
+    const esCelular =
+    window.innerWidth <= 800;
+
+
+    canvasCorazones.width =
+        ancho;
+
+    canvasCorazones.height =
+        alto;
+
+
+    contextoCorazones.textAlign =
+        "center";
+
+    contextoCorazones.textBaseline =
+        "middle";
+
+
+    const colores = [
+        "#ff1744",
+        "#ff3158",
+        "#ff5271",
+        "#ff7189",
+        "#ff8da0",
+        "#ffb0bd"
+    ];
+
+
+    const cantidadObjetivo =
+    esCelular
+        ? 180
+        : 320;
+
+
+    const corazones = [];
+
+
+    const distanciaMinima =
+    esCelular
+        ? 10
+        : 8;
+
+
+    let intentos =
+        0;
+
+
+    const maxIntentos =
+        20000;
+
+
+    /*
+        =================================================
+        1. GENERAMOS LOS CORAZONES
+        =================================================
+    */
+
+    while (
+        corazones.length
+        <
+        cantidadObjetivo
+        &&
+        intentos
+        <
+        maxIntentos
+    ) {
+
+        intentos++;
+
+
+        const nx =
+            -1.25
+            +
+            Math.random() * 2.5;
+
+
+        const ny =
+            -1.2
+            +
+            Math.random() * 2.4;
+
+
+        /*
+            Fórmula matemática
+            de la silueta.
+        */
+
+        const formula =
+            Math.pow(
+                nx * nx
+                +
+                ny * ny
+                -
+                1,
+                3
+            )
+            -
+            nx
+            *
+            nx
+            *
+            Math.pow(
+                ny,
+                3
+            );
+
+
+        if (formula > 0) {
+            continue;
+        }
+
+
+        /*
+            Parte superior un poco
+            más ancha.
+        */
+
+        const escalaHorizontal =
+    esCelular
+        ? (
+            ny > 0
+                ? 0.27
+                : 0.22
+        )
+        : (
+            ny > 0
+                ? 0.20
+                : 0.1625
+        );
+
+
+        let x =
+            ancho / 2
+            +
+            nx
+            *
+            ancho
+            *
+            escalaHorizontal;
+
+
+        const escalaVertical =
+    esCelular
+        ? 0.275
+        : 0.175;
+
+
+let y =
+    (
+        esCelular
+            ? alto * 0.39
+            : alto * 0.34
+    )
+    -
+    ny
+    *
+    alto
+    *
+    escalaVertical;
+
+
+        /*
+            Hendidura superior.
+        */
+
+        if (ny > 0.35) {
+
+            const cercaniaCentro =
+                Math.max(
+                    0,
+                    1
+                    -
+                    Math.abs(nx) / 0.55
+                );
+
+
+            y +=
+                cercaniaCentro
+                *
+                alto
+                *
+                0.055;
+        }
+
+
+        /*
+            Extendemos ligeramente
+            la parte inferior.
+        */
+
+        if (ny < 0) {
+
+            y +=
+                Math.abs(ny)
+                *
+                alto
+                *
+                0.025;
+        }
+
+/*
+    Ajuste vertical exclusivo para PC.
+*/
+
+if (!esCelular) {
+    y += 55;
+}
+
+
+
+
+        /*
+            =================================================
+            DISTANCIA MÍNIMA
+            =================================================
+        */
+
+        let demasiadoCerca =
+            false;
+
+
+        for (
+            const otro of corazones
+        ) {
+
+            const dx =
+                x - otro.x;
+
+
+            const dy =
+                y - otro.y;
+
+
+            const distancia =
+                Math.sqrt(
+                    dx * dx
+                    +
+                    dy * dy
+                );
+
+
+            if (
+                distancia
+                <
+                distanciaMinima
+            ) {
+
+                demasiadoCerca =
+                    true;
+
+                break;
+            }
+        }
+
+
+        if (demasiadoCerca) {
+            continue;
+        }
+
+
+        /*
+            =================================================
+            TAMAÑOS
+            =================================================
+        */
+
+     const probabilidad =
+    Math.random();
+
+
+let tamano;
+
+
+/*
+    Parte inferior:
+    corazones medianos para cubrir
+    las ramas sin crear un bloque enorme.
+*/
+
+if (ny < -0.15) {
+
+    if (probabilidad < 0.55) {
+
+        tamano =
+            14
+            +
+            Math.random() * 7;
+
+    } else {
+
+        tamano =
+            20
+            +
+            Math.random() * 8;
+    }
+
+} else {
+
+    /*
+        Parte media y superior:
+        más variedad y corazones
+        ligeramente más grandes.
+    */
+
+    if (probabilidad < 0.40) {
+
+        tamano =
+            14
+            +
+            Math.random() * 7;
+
+    } else if (
+        probabilidad < 0.82
+    ) {
+
+        tamano =
+            21
+            +
+            Math.random() * 9;
+
+    } else {
+
+        tamano =
+            30
+            +
+            Math.random() * 10;
+    }
+}
+
+
+        /*
+            En vez de dibujarlo,
+            guardamos sus datos.
+        */
+
+        corazones.push({
+
+            x,
+            y,
+            tamano,
+
+            color:
+                colores[
+                    Math.floor(
+                        Math.random()
+                        *
+                        colores.length
+                    )
+                ],
+
+            /*
+                Cada corazón tendrá
+                su propio momento
+                de aparición.
+            */
+
+            retraso:
+                Math.random() * 2800
+
+        });
+    }
+
+
+    /*
+        =================================================
+        2. ANIMACIÓN
+        =================================================
+    */
+
+    const duracionEntrada =
+        450;
+
+
+    const inicio =
+        performance.now();
+
+
+    /*
+        Averiguamos cuándo termina
+        el último corazón.
+    */
+
+    const ultimoRetraso =
+        Math.max(
+            ...corazones.map(
+                corazon =>
+                    corazon.retraso
+            )
+        );
+
+
+    function animar(
+        tiempoActual
+    ) {
+
+        const tiempo =
+            tiempoActual
+            -
+            inicio;
+
+
+        /*
+            Limpiamos únicamente
+            el Canvas.
+
+            NO estamos eliminando
+            elementos del DOM.
+        */
+
+        contextoCorazones.clearRect(
+            0,
+            0,
+            ancho,
+            alto
+        );
+
+
+        /*
+            Dibujamos todos los que
+            ya deben haber comenzado
+            a aparecer.
+        */
+
+        for (
+            const corazon of corazones
+        ) {
+
+            const tiempoCorazon =
+                tiempo
+                -
+                corazon.retraso;
+
+
+            if (
+                tiempoCorazon < 0
+            ) {
+                continue;
+            }
+
+
+            /*
+                Progreso:
+
+                0 = acaba de aparecer
+                1 = tamaño completo
+            */
+
+            const progreso =
+                Math.min(
+                    tiempoCorazon
+                    /
+                    duracionEntrada,
+                    1
+                );
+
+
+            /*
+                Pequeño efecto de
+                florecimiento.
+
+                Primero crece un poco
+                de más y luego termina
+                en su tamaño normal.
+            */
+
+            let escala;
+
+
+            if (progreso < 0.75) {
+
+                escala =
+                    (
+                        progreso
+                        /
+                        0.75
+                    )
+                    *
+                    1.12;
+
+            } else {
+
+                const regreso =
+                    (
+                        progreso
+                        -
+                        0.75
+                    )
+                    /
+                    0.25;
+
+
+                escala =
+                    1.12
+                    -
+                    regreso
+                    *
+                    0.12;
+            }
+
+
+            const tamanoActual =
+                corazon.tamano
+                *
+                escala;
+
+
+            contextoCorazones.font =
+                `${tamanoActual}px Georgia`;
+
+
+            contextoCorazones.fillStyle =
+                corazon.color;
+
+
+            contextoCorazones.fillText(
+                "♥",
+                corazon.x,
+                corazon.y
+            );
+        }
+
+const retrasoCentral =
+    2300;
+
+        /*
+            =================================================
+            ¿SEGUIMOS ANIMANDO?
+            =================================================
+
+            Solo usamos requestAnimationFrame
+            mientras todavía hay corazones
+            apareciendo.
+        */
+
+        const finalAnimacion =
+            Math.max(
+                ultimoRetraso
+                +
+                duracionEntrada,
+
+                retrasoCentral
+                +
+                550
+            );
+
+
+        if (
+            tiempo
+            <
+            finalAnimacion
+        ) {
+
+            requestAnimationFrame(
+                animar
+            );
+        }
+    }
+
+
+    requestAnimationFrame(
+        animar
+    );
+}
+
+probarCanvas();
