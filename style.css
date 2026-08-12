@@ -8,118 +8,506 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
     min-height: 100%;
 }
 
-
 body {
-    overflow: hidden;
-
-    background: #140d28;
-}
-
-
-/* =====================================================
-   ESCENA
-===================================================== */
-
-.felicitacion {
-    position: relative;
-
-    width: 100%;
-    height: 100vh;
+    min-height: 100vh;
 
     overflow: hidden;
-
-    background-image:
-        url("assets/fondo-bebe.png");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-}
-
-
-/* =====================================================
-   TÍTULO
-===================================================== */
-
-.titulo-cumpleanos {
-    position: absolute;
-
-    top: 6%;
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 94%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    gap: 3px;
-
-    margin: 0;
 
     font-family:
         Georgia,
         "Times New Roman",
         serif;
 
-    font-size:
-        clamp(
-            42px,
-            5.5vw,
-            82px
-        );
-
-    font-weight: 700;
-
-    line-height: 1;
-
-    white-space: nowrap;
-
-    color: #fff4c7;
-
-    text-align: center;
-
-    pointer-events: none;
-
-    z-index: 5;
+    color: white;
 }
 
 
 /* =====================================================
-   LETRAS DEL TÍTULO
+   ESCENA GENERAL
 ===================================================== */
 
-.letra-cumpleanos {
-    display: inline-block;
+.escena {
+    position: relative;
 
-    opacity: 0;
+    width: 100%;
+    min-height: 100vh;
 
-    transform:
-        translateY(-55px)
-        rotate(-8deg)
-        scale(0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 35px;
+
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(
+            rgba(8, 6, 24, 0.10),
+            rgba(8, 6, 24, 0.22)
+        ),
+        url("assets/fondo-noche.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* =====================================================
+   CAPAS ANIMADAS
+===================================================== */
+
+.capa-estrellas,
+.capa-estrella-fugaz,
+.capa-frases,
+.capa-confeti {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.capa-estrellas {
+    z-index: 1;
+}
+
+.capa-estrella-fugaz {
+    z-index: 2;
+}
+
+.capa-frases {
+    z-index: 2;
+}
+
+.capa-confeti {
+    z-index: 30;
+}
+
+
+/* =====================================================
+   TARJETA PRINCIPAL
+===================================================== */
+
+.tarjeta {
+    position: relative;
+
+    z-index: 3;
+
+    width: min(1100px, 92vw);
+    height: min(650px, 78vh);
+
+    display: grid;
+
+    grid-template-columns:
+        46% 54%;
+
+    overflow: hidden;
+
+    border-radius: 42px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.14),
+            rgba(255, 255, 255, 0.05)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.24);
+
+    backdrop-filter:
+        blur(9px);
+
+    -webkit-backdrop-filter:
+        blur(9px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.38),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.20);
+}
+
+
+/* =====================================================
+   COLUMNA DE TEXTO
+===================================================== */
+
+.lado-texto {
+    position: relative;
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding:
+        55px 25px 30px 65px;
+}
+
+
+/* =====================================================
+   MENSAJE
+===================================================== */
+
+.mensaje {
+    max-width: 455px;
+
+    font-size:
+        clamp(
+            15px,
+            1.3vw,
+            20px
+        );
+
+    line-height: 1.48;
+
+    color:
+        rgba(255, 255, 255, 0.95);
 
     text-shadow:
-        0 0 5px rgba(255, 255, 255, 1),
-        0 0 12px rgba(255, 224, 145, 0.95),
-        0 0 25px rgba(255, 184, 90, 0.75),
-        0 4px 8px rgba(45, 15, 55, 0.55);
+        0 2px 10px
+        rgba(0, 0, 0, 0.70);
+}
+
+.mensaje p {
+    margin-bottom: 12px;
+}
+
+.mensaje-inicio {
+    font-size:
+        clamp(
+            20px,
+            1.7vw,
+            27px
+        );
+
+    font-weight: 700;
+
+    color: white;
+}
+
+.mensaje-final {
+margin-bottom: 8px;
+
+    font-weight: 700;
+
+    color: #ffd4e5;
+}
+
+
+/* =====================================================
+   CONTADOR
+===================================================== */
+
+.zona-contador {
+    width: 100%;
+
+    flex-shrink: 0;
+}
+
+.contador-titulo {
+    margin-bottom: 12px;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    color:
+        rgba(255, 255, 255, 0.92);
+
+    text-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.65);
+}
+
+.contador {
+    display: flex;
+
+    gap: 11px;
+
+    align-items: center;
+
+    flex-wrap: nowrap;
+}
+
+
+/* =====================================================
+   TARJETAS DE CRISTAL DEL CONTADOR
+===================================================== */
+
+.tarjeta-tiempo {
+    position: relative;
+
+    width: 82px;
+    height: 86px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.22),
+            rgba(255, 255, 255, 0.07)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.32);
+
+    backdrop-filter:
+        blur(16px);
+
+    -webkit-backdrop-filter:
+        blur(16px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.24),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.40),
+
+        inset 0 -1px 0
+        rgba(255, 255, 255, 0.10);
+}
+
+.tarjeta-tiempo::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 7px;
+    right: 7px;
+
+    height: 42%;
+
+    border-radius:
+        16px 16px 50% 50%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.20),
+            rgba(255, 255, 255, 0)
+        );
+
+    pointer-events: none;
+}
+
+.tarjeta-tiempo::after {
+    content: "";
+
+    position: absolute;
+
+    width: 50px;
+    height: 20px;
+
+    bottom: -12px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 100, 170, 0.35);
+
+    filter: blur(12px);
+
+    pointer-events: none;
+}
+
+.numero {
+    position: relative;
+
+    z-index: 2;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    line-height: 1;
+
+    color: white;
+
+    text-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.45);
+}
+
+.unidad {
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 8px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(255, 255, 255, 0.72);
+}
+
+
+/* =====================================================
+   ÁRBOL
+===================================================== */
+
+.lado-arbol {
+    position: relative;
+
+    min-width: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-end;
+
+    padding:
+        15px 15px 10px;
+}
+
+.arbol-svg {
+    display: block;
+
+    width: min(480px, 100%);
+    height: 100%;
+
+    max-height: 600px;
+
+    overflow: visible;
+}
+
+
+/* =====================================================
+   RAMAS SVG
+===================================================== */
+
+.rama-svg {
+    fill: none;
+
+    stroke: #98542f;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(0, 0, 0, 0.30)
+        );
 
     animation:
-        aparecerLetra
-        0.75s
+        crecerArbol
+        1.15s
+        ease-out
+        forwards;
+}
+
+.tronco-svg {
+    stroke: #98542f;
+
+    stroke-width: 20;
+
+    animation-delay: 0s;
+}
+
+.rama-grande {
+    stroke: #98542f;
+
+    stroke-width: 9;
+
+    animation-delay: 0.65s;
+}
+
+.rama-media {
+    stroke: #98542f;
+
+    stroke-width: 6;
+
+    animation-delay: 0.95s;
+}
+
+.rama-fina {
+    stroke: #98542f;
+
+    stroke-width: 4;
+
+    animation-delay: 1.25s;
+}
+
+.ramita {
+    stroke: #98542f;
+
+    stroke-width: 2.8;
+
+    animation-delay: 1.55s;
+}
+
+@keyframes crecerArbol {
+
+    from {
+        stroke-dashoffset: 1;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+
+/* =====================================================
+   CORAZONES DEL ÁRBOL
+===================================================== */
+
+.corazon-arbol {
+    opacity: 0;
+
+    transform-box: fill-box;
+    transform-origin: center;
+
+    --rotacion: 0deg;
+
+    animation:
+        florecerCorazon
+        0.45s
         cubic-bezier(
             0.34,
             1.56,
@@ -128,165 +516,1108 @@ body {
         )
         forwards,
 
-        brilloLetra
-        3s
+        vivirCorazon
+        3.5s
         ease-in-out
         infinite;
+
+    filter:
+        drop-shadow(
+            0 2px 2px
+            rgba(100, 0, 25, 0.22)
+        );
 }
 
-
-.espacio-titulo {
-    width: 24px;
-
-    flex-shrink: 0;
-}
-
-
-/* =====================================================
-   ENTRADA DE LETRAS
-===================================================== */
-
-@keyframes aparecerLetra {
+@keyframes florecerCorazon {
 
     0% {
         opacity: 0;
 
         transform:
-            translateY(-55px)
-            rotate(-8deg)
-            scale(0.5);
+            rotate(var(--rotacion))
+            scale(0);
     }
 
-    70% {
+    75% {
         opacity: 1;
 
         transform:
-            translateY(6px)
-            rotate(2deg)
-            scale(1.12);
+            rotate(var(--rotacion))
+            scale(1.16);
     }
 
     100% {
         opacity: 1;
 
         transform:
-            translateY(0)
-            rotate(0deg)
+            rotate(var(--rotacion))
             scale(1);
     }
 }
 
-
-/* =====================================================
-   BRILLO PERMANENTE DEL TÍTULO
-===================================================== */
-
-@keyframes brilloLetra {
+@keyframes vivirCorazon {
 
     0%,
     100% {
-        text-shadow:
-            0 0 5px rgba(255, 255, 255, 0.9),
-            0 0 12px rgba(255, 224, 145, 0.75),
-            0 0 22px rgba(255, 184, 90, 0.55),
-            0 4px 8px rgba(45, 15, 55, 0.55);
+        transform:
+            rotate(var(--rotacion))
+            translateY(0)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            rotate(
+                calc(
+                    var(--rotacion) - 2deg
+                )
+            )
+            translateY(-2px)
+            scale(1.04);
     }
 
     50% {
-        text-shadow:
-            0 0 8px rgba(255, 255, 255, 1),
-            0 0 20px rgba(255, 232, 160, 1),
-            0 0 38px rgba(255, 184, 90, 0.9),
-            0 4px 8px rgba(45, 15, 55, 0.55);
+        transform:
+            rotate(var(--rotacion))
+            translateY(-4px)
+            scale(1.08);
+    }
+
+    75% {
+        transform:
+            rotate(
+                calc(
+                    var(--rotacion) + 2deg
+                )
+            )
+            translateY(-2px)
+            scale(1.03);
     }
 }
 
 
 /* =====================================================
-   MENSAJE
+   ESTRELLAS
 ===================================================== */
 
-.mensaje-cumpleanos {
+.estrella {
     position: absolute;
 
-    top: 27%;
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 1);
+
+    box-shadow:
+        0 0 4px
+        rgba(255, 255, 255, 1),
+
+        0 0 9px
+        rgba(255, 255, 255, 0.95),
+
+        0 0 16px
+        rgba(220, 210, 255, 0.75),
+
+        0 0 25px
+        rgba(190, 170, 255, 0.35);
+
+    animation:
+        parpadeoEstrella
+        ease-in-out
+        infinite;
+}
+
+@keyframes parpadeoEstrella {
+
+    0%,
+    100% {
+        opacity: 0.45;
+
+        transform:
+            scale(0.85);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            scale(1.65);
+    }
+}
+
+
+/* =====================================================
+   ESTRELLA FUGAZ
+===================================================== */
+
+.estrella-fugaz {
+    position: absolute;
+
+    width: 190px;
+    height: 2px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0.25),
+            rgba(255, 255, 255, 0.95)
+        );
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(255, 255, 255, 0.8)
+        );
+
+    transform-origin:
+        right center;
+
+    opacity: 0;
+
+    animation:
+        vueloEstrellaFugaz
+        1.35s
+        linear
+        forwards;
+}
+
+.estrella-fugaz::after {
+    content: "";
+
+    position: absolute;
+
+    right: -2px;
+    top: 50%;
+
+    width: 6px;
+    height: 6px;
+
+    transform:
+        translateY(-50%);
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 7px white,
+        0 0 14px white,
+        0 0 22px
+        rgba(255, 255, 255, 0.70);
+}
+
+@keyframes vueloEstrellaFugaz {
+
+    0% {
+        transform:
+            translate(0, 0)
+            rotate(27deg);
+
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(650px, 310px)
+            rotate(27deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   FRASES CAYENDO
+===================================================== */
+
+.frase-cayendo {
+    position: absolute;
+
+    top: -60px;
+
+    white-space: nowrap;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-weight: 500;
+
+    letter-spacing: 0.4px;
+
+    color:
+        rgba(255, 235, 246, 0.90);
+
+    text-shadow:
+        0 0 7px
+        rgba(255, 130, 190, 0.85),
+
+        0 0 15px
+        rgba(255, 100, 170, 0.45),
+
+        0 2px 6px
+        rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+
+    animation:
+        caerFrase
+        linear
+        forwards;
+}
+
+@keyframes caerFrase {
+
+    0% {
+        transform:
+            translateY(-50px)
+            translateX(0)
+            rotate(-3deg);
+
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 0.9;
+    }
+
+    50% {
+        transform:
+            translateY(55vh)
+            translateX(18px)
+            rotate(2deg);
+
+        opacity: 0.85;
+    }
+
+    88% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform:
+            translateY(115vh)
+            translateX(-12px)
+            rotate(-2deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   CONFETI POR TOQUE
+===================================================== */
+
+.corazon-toque {
+    position: absolute;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    font-size: 34px;
+
+    line-height: 1;
+
+    color: #ff3d6e;
+
+    pointer-events: none;
+
+    text-shadow:
+        0 0 8px
+        rgba(255, 80, 130, 0.8),
+
+        0 0 18px
+        rgba(255, 80, 130, 0.45);
+
+    animation:
+        aparecerCorazonToque
+        0.32s
+        cubic-bezier(
+            0.34,
+            1.56,
+            0.64,
+            1
+        )
+        forwards;
+}
+
+@keyframes aparecerCorazonToque {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+
+        opacity: 0;
+    }
+
+    70% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.35);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+.particula-corazon {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    line-height: 1;
+
+    pointer-events: none;
+
+    will-change:
+        transform,
+        opacity;
+
+    animation:
+        explotarCorazon
+        var(--duracion)
+        cubic-bezier(
+            0.15,
+            0.65,
+            0.35,
+            1
+        )
+        forwards;
+}
+
+@keyframes explotarCorazon {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            translate(0, 0)
+            rotate(0deg)
+            scale(1);
+
+        opacity: 1;
+    }
+
+    65% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            translate(
+                var(--destino-x),
+                var(--destino-y)
+            )
+            rotate(var(--giro))
+            scale(0.25);
+
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   BOTÓN HUELLA
+   FUERA DE LA TARJETA
+===================================================== */
+
+.boton-sorpresa {
+    display: none;
+
+    position: absolute;
+
     left: 50%;
+
+    /*
+        Queda debajo de la tarjeta.
+    */
+    top: calc(50% + min(325px, 39vh) + 12px);
+
+    z-index: 15;
+
+    width: 180px;
+    height: 145px;
+
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    cursor: pointer;
 
     transform:
         translateX(-50%);
 
-    width:
-        min(
-            820px,
-            78vw
+    -webkit-tap-highlight-color:
+        transparent;
+
+    filter:
+        drop-shadow(
+            0 10px 18px
+            rgba(0, 0, 0, 0.25)
         );
 
-    z-index: 5;
-
-    text-align: center;
-
-    pointer-events: none;
+    animation:
+        respirarHuella
+        2.8s
+        ease-in-out
+        infinite;
 }
 
 
 /* =====================================================
-   BLOQUES DEL MENSAJE
+   DEDOS DE LA HUELLA
 ===================================================== */
 
-.bloque-mensaje {
-    margin-bottom: 18px;
+.dedos-huella {
+    position: absolute;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    inset: 0;
 
-    font-size:
-        clamp(
-            20px,
-            1.6vw,
-            26px
+    pointer-events: none;
+}
+
+.dedo {
+    position: absolute;
+
+    display: block;
+
+    width: 40px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.30),
+            rgba(255, 160, 205, 0.10)
         );
 
-    line-height: 1.55;
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.48);
 
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.96
-        );
+    backdrop-filter:
+        blur(12px);
 
-    text-shadow:
-        0 2px 5px
-        rgba(
-            20,
-            8,
-            30,
-            0.95
-        ),
+    -webkit-backdrop-filter:
+        blur(12px);
 
-        0 0 12px
-        rgba(
-            50,
-            20,
-            70,
-            0.70
-        );
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.55),
 
-    opacity: 0;
+        inset 0 -5px 12px
+        rgba(255, 90, 165, 0.10),
+
+        0 0 14px
+        rgba(255, 150, 205, 0.20);
+}
+
+.dedo-1 {
+    left: 5px;
+    top: 42px;
 
     transform:
-        translateY(22px);
+        rotate(-32deg);
+}
 
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
+.dedo-2 {
+    left: 44px;
+    top: 5px;
+
+    transform:
+        rotate(-12deg);
+}
+
+.dedo-3 {
+    right: 44px;
+    top: 5px;
+
+    transform:
+        rotate(12deg);
+}
+
+.dedo-4 {
+    right: 5px;
+    top: 42px;
+
+    transform:
+        rotate(32deg);
 }
 
 
-.bloque-mensaje.visible {
+/* =====================================================
+   ALMOHADILLA CENTRAL
+===================================================== */
+
+.almohadilla-huella {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 120px;
+    height: 92px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        48% 48%
+        42% 42%
+        /
+        52% 52%
+        45% 45%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.28),
+            rgba(255, 120, 185, 0.10)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.50);
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+    box-shadow:
+        inset 0 2px 0
+        rgba(255, 255, 255, 0.55),
+
+        inset 0 -10px 20px
+        rgba(255, 80, 155, 0.10),
+
+        0 0 22px
+        rgba(255, 135, 195, 0.22);
+}
+
+
+/* =====================================================
+   TEXTO DE LA HUELLA
+===================================================== */
+
+.texto-huella {
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    color:
+        rgba(255, 255, 255, 0.96);
+
+    font-size: 14px;
+
+    line-height: 1.1;
+
+    text-align: center;
+
+    text-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.45);
+}
+
+.texto-huella strong {
+    margin-top: 3px;
+
+    font-size: 17px;
+
+    color: #ffd5e8;
+}
+
+
+/* =====================================================
+   ANIMACIÓN DE LA HUELLA
+===================================================== */
+
+@keyframes respirarHuella {
+
+    0%,
+    100% {
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            translateY(-5px)
+            scale(1.035);
+    }
+}
+
+.boton-sorpresa:active {
+    transform:
+        translateX(-50%)
+        scale(0.94);
+}
+
+
+/* =====================================================
+   RESPONSIVE PÁGINA 1
+   CELULAR
+===================================================== */
+
+/* =====================================================
+   RESPONSIVE PÁGINA 1
+   CELULAR
+===================================================== */
+
+/* =====================================================
+   RESPONSIVE PÁGINA 1
+   CELULAR
+===================================================== */
+
+@media (max-width: 800px) {
+
+/* =============================================
+   FRASES MÁS VISIBLES EN CELULAR
+============================================= */
+
+.frase-cayendo {
+    opacity: 1;
+
+    font-size: 14px !important;
+
+    font-weight: 600;
+
+    color:
+        rgba(255, 235, 246, 0.95);
+
+    text-shadow:
+        0 0 7px
+        rgba(255, 130, 190, 1),
+
+        0 0 16px
+        rgba(255, 100, 170, 0.75),
+
+        0 2px 6px
+        rgba(0, 0, 0, 0.60);
+}
+
+
+    html,
+    body {
+        width: 100%;
+        min-height: 100%;
+    }
+
+
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+
+    /* =========================================
+       ESCENA
+    ========================================= */
+
+    .escena {
+        width: 100%;
+        min-height: 100svh;
+
+        display: flex;
+        flex-direction: column;
+
+        justify-content: flex-start;
+        align-items: center;
+
+        padding:
+            55px 0 150px;
+
+        overflow: hidden;
+
+        background-position: center;
+        background-attachment: scroll;
+    }
+
+
+    /* =========================================
+       TARJETA MÁS PEQUEÑA
+    ========================================= */
+
+    .tarjeta {
+        width: 80vw;
+        height: auto;
+
+        min-height: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        border-radius: 24px;
+
+        overflow: hidden;
+
+        background:
+            linear-gradient(
+                135deg,
+                rgba(35, 25, 75, 0.16),
+                rgba(80, 30, 95, 0.06)
+            );
+
+        backdrop-filter:
+            blur(3px);
+
+        -webkit-backdrop-filter:
+            blur(3px);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.22);
+
+        box-shadow:
+            0 12px 32px
+            rgba(0, 0, 0, 0.22);
+    }
+
+
+    /* =========================================
+       ÁRBOL
+    ========================================= */
+
+    .lado-arbol {
+        order: 1;
+
+        width: 100%;
+        height: 220px;
+
+        display: flex;
+
+        justify-content: center;
+        align-items: flex-start;
+
+        padding:
+            8px 0 0;
+    }
+
+
+    .arbol-svg {
+        width: 205px;
+        height: 225px;
+
+        max-width: 88%;
+
+        overflow: visible;
+    }
+
+
+    /* =========================================
+       COLUMNA DE TEXTO
+    ========================================= */
+
+    .lado-texto {
+        order: 2;
+
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        padding:
+            8px 16px 22px;
+    }
+
+
+    /* =========================================
+       MENSAJE
+    ========================================= */
+
+    .mensaje {
+        width: 100%;
+        max-width: none;
+
+        font-size: 13px;
+
+        line-height: 1.34;
+
+        text-align: left;
+    }
+
+
+    .mensaje p {
+        margin-bottom: 9px;
+    }
+
+
+    .mensaje-inicio {
+        margin-bottom: 12px;
+
+        font-size: 18px;
+
+        line-height: 1.22;
+    }
+
+
+    .mensaje-final {
+        margin-bottom: 8px;
+
+        font-size: 14px;
+    }
+
+
+    /* =========================================
+       TÍTULO DEL CONTADOR
+    ========================================= */
+
+    .zona-contador {
+        width: 100%;
+
+        margin-top: 2px;
+    }
+
+
+    .contador-titulo {
+        margin-bottom: 8px;
+
+        font-size: 13px;
+
+        line-height: 1.2;
+    }
+
+
+    /* =========================================
+       CONTADOR
+    ========================================= */
+
+    .contador {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 5px;
+    }
+
+
+    .tarjeta-tiempo {
+        width: 100%;
+        height: 58px;
+
+        min-width: 0;
+
+        border-radius: 13px;
+    }
+
+
+    .numero {
+        font-size: 20px;
+    }
+
+
+    .unidad {
+        margin-top: 4px;
+
+        font-size: 6px;
+
+        letter-spacing: 0.2px;
+    }
+
+
+    /* =========================================
+       FRASES CAYENDO
+    ========================================= */
+
+    .frase-cayendo {
+        font-size: 11px !important;
+
+        font-weight: 600;
+
+        color:
+            rgba(
+                255,
+                235,
+                246,
+                0.96
+            );
+
+        text-shadow:
+            0 0 6px
+            rgba(
+                255,
+                130,
+                190,
+                1
+            ),
+
+            0 0 13px
+            rgba(
+                255,
+                100,
+                170,
+                0.75
+            ),
+
+            0 2px 5px
+            rgba(
+                0,
+                0,
+                0,
+                0.65
+            );
+    }
+
+
+    /* =========================================
+       CELEBRACIÓN DENTRO DE LA TARJETA
+    ========================================= */
+
+    .celebracion-tarjeta {
+        border-radius: 24px;
+    }
+
+
+    /* =========================================
+       HUELLA DE CUMPLEAÑOS
+    ========================================= */
+
+    .boton-sorpresa {
+        position: absolute;
+
+        left: 50%;
+
+        top: auto;
+        bottom: 10px;
+
+        width: 135px;
+        height: 112px;
+
+        transform:
+            translateX(-50%);
+    }
+
+
+    .almohadilla-huella {
+        width: 90px;
+        height: 70px;
+    }
+
+
+    .dedo {
+        width: 30px;
+        height: 36px;
+    }
+
+
+    .dedo-1 {
+        left: 3px;
+        top: 32px;
+    }
+
+
+    .dedo-2 {
+        left: 33px;
+        top: 3px;
+    }
+
+
+    .dedo-3 {
+        right: 33px;
+        top: 3px;
+    }
+
+
+    .dedo-4 {
+        right: 3px;
+        top: 32px;
+    }
+
+
+    .texto-huella {
+        font-size: 10px;
+    }
+
+
+    .texto-huella strong {
+        font-size: 13px;
+    }
+}
+/* =====================================================
+   MENSAJE DE ESPERA POR BLOQUES
+===================================================== */
+
+.bloque-espera {
+    margin-bottom: 12px;
+
+    opacity: 0;
+
+    transform: translateY(18px);
+
+    transition:
+        opacity 1.1s ease,
+        transform 1.1s ease;
+}
+
+
+.bloque-espera.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+/* =====================================================
+   TÍTULO FINAL DEL CONTADOR
+===================================================== */
+
+.contador-titulo-final {
+    opacity: 0;
+
+    transform:
+        translateY(14px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.contador-titulo-final.visible {
     opacity: 1;
 
     transform:
@@ -295,349 +1626,28 @@ body {
 
 
 /* =====================================================
-   CIERRE DEL MENSAJE
+   EXPLOSIÓN DE COLORES DENTRO DE LA TARJETA
 ===================================================== */
 
-.cierre-mensaje {
-    margin-top: 25px;
-
-    margin-bottom: 7px;
-
-    font-size:
-        clamp(
-            20px,
-            1.8vw,
-            27px
-        );
-
-    font-weight: 700;
-
-    color: #fff0bc;
-}
-
-
-.firma-mensaje {
-    margin-bottom: 0;
-
-    font-size:
-        clamp(
-            18px,
-            1.6vw,
-            24px
-        );
-
-    font-weight: 700;
-
-    color: #ffd1e7;
-}
-
-
-/* =====================================================
-   DESTELLOS
-===================================================== */
-
-.capa-destellos {
+.celebracion-tarjeta {
     position: absolute;
 
     inset: 0;
+
+    z-index: 20;
 
     overflow: hidden;
 
     pointer-events: none;
 
-    z-index: 3;
+    border-radius: inherit;
 }
 
-
-.destello {
+.particula-tarjeta {
     position: absolute;
 
-    width: var(--tamano);
-    height: var(--tamano);
-
-    border-radius: 50%;
-
-    background: #fffbea;
-
-    opacity: 0;
-
-    box-shadow:
-        0 0 8px rgba(255, 255, 255, 1),
-        0 0 16px rgba(255, 246, 190, 1),
-        0 0 28px rgba(255, 210, 120, 0.95),
-        0 0 45px rgba(255, 165, 100, 0.65);
-
-    animation:
-        brillarDestello
-        var(--duracion)
-        ease-in-out
-        infinite;
-
-    animation-delay:
-        var(--retraso);
-}
-
-
-.destello::before {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width:
-        calc(
-            var(--tamano) * 6
-        );
-
-    height: 2px;
-
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.35),
-            rgba(255, 255, 255, 1),
-            rgba(255, 255, 255, 0.35),
-            transparent
-        );
-
-    box-shadow:
-        0 0 8px
-        rgba(255, 245, 190, 0.75);
-}
-
-
-.destello::after {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 2px;
-
-    height:
-        calc(
-            var(--tamano) * 6
-        );
-
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent,
-            rgba(255, 255, 255, 0.35),
-            rgba(255, 255, 255, 1),
-            rgba(255, 255, 255, 0.35),
-            transparent
-        );
-
-    box-shadow:
-        0 0 8px
-        rgba(255, 245, 190, 0.75);
-}
-
-
-@keyframes brillarDestello {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            scale(0.2)
-            rotate(0deg);
-    }
-
-    20% {
-        opacity: 0;
-    }
-
-    38% {
-        opacity: 0.65;
-
-        transform:
-            scale(0.75)
-            rotate(20deg);
-    }
-
-    50% {
-        opacity: 1;
-
-        transform:
-            scale(1.7)
-            rotate(45deg);
-    }
-
-    62% {
-        opacity: 0.85;
-
-        transform:
-            scale(1.25)
-            rotate(65deg);
-    }
-
-    78% {
-        opacity: 0.35;
-
-        transform:
-            scale(0.7)
-            rotate(85deg);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            scale(0.2)
-            rotate(100deg);
-    }
-}
-
-
-/* =====================================================
-   CIERRE FINAL
-   ES EL MISMO ELEMENTO PARA PC Y CELULAR
-===================================================== */
-
-.cierre-cumpleanos {
-    position: absolute;
-
-    left: 50%;
-    bottom: 8%;
-
-    transform:
-        translateX(-50%)
-        translateY(20px)
-        scale(0.9);
-
-    width: 90%;
-
-    z-index: 8;
-
-    text-align: center;
-
-    opacity: 0;
-
-    pointer-events: none;
-}
-
-
-.cierre-cumpleanos p {
-    margin: 0;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            22px,
-            2.2vw,
-            34px
-        );
-
-    font-weight: 700;
-
-    color: #fff4c7;
-
-    text-shadow:
-        0 0 8px rgba(255, 255, 255, 1),
-        0 0 18px rgba(255, 220, 130, 0.95),
-        0 0 32px rgba(255, 175, 80, 0.75),
-        0 4px 8px rgba(50, 20, 40, 0.65);
-}
-
-
-/* PC */
-
-.cierre-cumpleanos.visible {
-    animation:
-        aparecerCierre
-        0.8s
-        ease-out
-        forwards,
-
-        desaparecerCierre
-        0.8s
-        ease-in
-        8.6s
-        forwards;
-}
-
-
-@keyframes aparecerCierre {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateX(-50%)
-            translateY(20px)
-            scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateX(-50%)
-            translateY(0)
-            scale(1);
-    }
-}
-
-
-@keyframes desaparecerCierre {
-
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   CAPA DE CELEBRACIÓN
-===================================================== */
-
-.capa-celebracion {
-    position: absolute;
-
-    inset: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
-    z-index: 7;
-}
-
-
-/* =====================================================
-   PARTÍCULAS FINALES
-===================================================== */
-
-.particula-celebracion {
-    position: absolute;
-
-    bottom: -40px;
     left: var(--x);
+    bottom: -20px;
 
     font-size:
         var(--tamano);
@@ -649,28 +1659,16 @@ body {
 
     text-shadow:
         0 0 8px currentColor,
-        0 0 16px currentColor,
-        0 0 28px currentColor;
-
-    filter:
-        drop-shadow(
-            0 0 8px currentColor
-        );
+        0 0 16px currentColor;
 
     animation:
-        subirCelebracion
+        explosionTarjeta
         var(--duracion)
-        cubic-bezier(
-            0.15,
-            0.65,
-            0.25,
-            1
-        )
+        ease-out
         forwards;
 }
 
-
-@keyframes subirCelebracion {
+@keyframes explosionTarjeta {
 
     0% {
         opacity: 0;
@@ -679,37 +1677,15 @@ body {
             translateY(0)
             translateX(0)
             rotate(0deg)
-            scale(0.5);
+            scale(0.6);
     }
 
-    10% {
+    15% {
         opacity: 1;
     }
 
-    45% {
+    70% {
         opacity: 1;
-
-        transform:
-            translateY(
-                calc(
-                    var(--altura) * 0.55
-                )
-            )
-            translateX(
-                calc(
-                    var(--desplazamiento) * 0.6
-                )
-            )
-            rotate(
-                calc(
-                    var(--giro) * 0.45
-                )
-            )
-            scale(1.25);
-    }
-
-    75% {
-        opacity: 0.95;
     }
 
     100% {
@@ -725,245 +1701,14 @@ body {
             rotate(
                 var(--giro)
             )
-            scale(0.8);
-    }
-}
+            scale(1.1);
+    
+            }
+            }
 
 
-/* =====================================================
-   RESPONSIVE
-   CELULAR
-===================================================== */
 
-@media (max-width: 800px) {
 
-    html,
-    body {
-        width: 100%;
 
-        height: auto;
 
-        min-height: 100%;
-    }
 
-
-    body {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-
-    /*
-        La escena crece con el contenido.
-        Así nunca termina el bosque antes
-        que el mensaje.
-    */
-
-    .felicitacion {
-        position: relative;
-
-        width: 100%;
-
-        height: auto;
-
-        min-height: 100svh;
-
-        padding:
-            35px 20px 100px;
-
-        overflow: visible;
-
-        background-size: cover;
-
-        background-position:
-            center center;
-    }
-
-
-
-    /* =========================================
-       TÍTULO MÓVIL
-    ========================================= */
-
-    .titulo-cumpleanos {
-        position: relative;
-
-        top: auto;
-        left: auto;
-
-        transform: none;
-
-        width: 100%;
-
-        display: flex;
-        flex-wrap: wrap;
-
-        justify-content: center;
-
-        gap: 1px;
-
-        margin:
-            0 auto 55px;
-
-        padding: 0;
-
-        font-size: 29px;
-
-        line-height: 1.1;
-
-        white-space: normal;
-
-        text-align: center;
-    }
-
-
-    .espacio-titulo {
-        width: 10px;
-    }
-
-
-    /* =========================================
-       MENSAJE MÓVIL
-    ========================================= */
-
-    .mensaje-cumpleanos {
-        position: relative;
-
-        top: auto;
-        left: auto;
-
-        transform: none;
-
-        width: 88%;
-
-        margin:
-            0 auto;
-
-        text-align: center;
-    }
-
-
-    .bloque-mensaje {
-        margin-bottom: 20px;
-
-        font-size: 15px;
-
-        line-height: 1.5;
-    }
-
-
-    .cierre-mensaje {
-        margin-top: 28px;
-
-        margin-bottom: 8px;
-
-        font-size: 18px;
-    }
-
-
-    .firma-mensaje {
-        margin-bottom: 0;
-
-        font-size: 17px;
-    }
-
-
-    /* =========================================
-       CIERRE FINAL MÓVIL
-    ========================================= */
-
-    .cierre-cumpleanos {
-        position: relative;
-
-        left: auto;
-        right: auto;
-
-        top: auto;
-        bottom: auto;
-
-        width: 88%;
-
-        margin:
-            70px auto 80px;
-
-        opacity: 0;
-
-        transform:
-            translateY(20px);
-
-        text-align: center;
-    }
-
-
-    .cierre-cumpleanos p {
-        font-size: 19px;
-
-        line-height: 1.35;
-    }
-
-
-    /*
-        En móvil aparece y SE QUEDA.
-
-        No usamos la animación de
-        desaparición del escritorio.
-    */
-
-    .cierre-cumpleanos.visible {
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-        animation: none;
-
-        transition:
-            opacity 0.9s ease,
-            transform 0.9s ease;
-    }
-
-
-    /* =========================================
-       DESTELLOS
-    ========================================= */
-
-    .capa-destellos {
-        position: fixed;
-
-        inset: 0;
-
-        width: 100%;
-        height: 100%;
-
-        overflow: hidden;
-    }
-
-
-    /* =========================================
-       CELEBRACIÓN
-    ========================================= */
-
-    .capa-celebracion {
-        position: fixed;
-
-        inset: 0;
-
-        width: 100%;
-        height: 100%;
-
-        overflow: hidden;
-    }
-.letra-cumpleanos {
-    animation:
-        aparecerLetra
-        0.75s
-        cubic-bezier(
-            0.34,
-            1.56,
-            0.64,
-            1
-        )
-        forwards;
-}
-   
-}
