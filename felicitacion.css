@@ -780,6 +780,7 @@ body {
     }
 
 
+
     /* =========================================
        TÍTULO MÓVIL
     ========================================= */
@@ -952,4 +953,18 @@ body {
 
         overflow: hidden;
     }
+
+.letra-cumpleanos {
+    animation:
+        aparecerLetra
+        0.75s
+        cubic-bezier(
+            0.34,
+            1.56,
+            0.64,
+            1
+        )
+        forwards;
+}
+
 }
