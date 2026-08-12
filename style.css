@@ -1702,8 +1702,22 @@ margin-bottom: 8px;
                 var(--giro)
             )
             scale(1.1);
-    }
+    
+            }
+            }
+
+.corazon-arbol {
+    animation:
+        florecerCorazon
+        0.4s
+        ease-out
+        forwards;
+
+    filter: none;
 }
+
+
+
 
 
 
