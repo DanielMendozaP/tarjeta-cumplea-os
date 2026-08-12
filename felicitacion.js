@@ -115,8 +115,10 @@ const capaDestellos =
 
 function crearDestellos() {
 
-    const cantidad =
-        90;
+  const cantidad =
+    window.innerWidth <= 800
+        ? 20
+        : 90;
 
 
     for (
