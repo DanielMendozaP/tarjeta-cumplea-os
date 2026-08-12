@@ -744,21 +744,24 @@ setInterval(
 );
 
 
-setTimeout(
-    crearFraseCayendo,
-    700
-);
+/* =====================================================
+   LLUVIA DE FRASES
+   SOLO EN ESCRITORIO
+===================================================== */
 
-const intervaloFrases =
-    window.innerWidth <= 800
-        ? 5000
-        : 3000;
+if (window.innerWidth > 800) {
+
+    setTimeout(
+        crearFraseCayendo,
+        700
+    );
 
 
-setInterval(
-    crearFraseCayendo,
-    intervaloFrases
-);
+    setInterval(
+        crearFraseCayendo,
+        3000
+    );
+}
 
 
 crearCorazonesArbol();
