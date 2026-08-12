@@ -1,0 +1,955 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    overflow: hidden;
+
+    background: #140d28;
+}
+
+
+/* =====================================================
+   ESCENA
+===================================================== */
+
+.felicitacion {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background-image:
+        url("assets/fondo-bebe.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.titulo-cumpleanos {
+    position: absolute;
+
+    top: 6%;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 94%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 3px;
+
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(
+            42px,
+            5.5vw,
+            82px
+        );
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    white-space: nowrap;
+
+    color: #fff4c7;
+
+    text-align: center;
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   LETRAS DEL TÍTULO
+===================================================== */
+
+.letra-cumpleanos {
+    display: inline-block;
+
+    opacity: 0;
+
+    transform:
+        translateY(-55px)
+        rotate(-8deg)
+        scale(0.5);
+
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 1),
+        0 0 12px rgba(255, 224, 145, 0.95),
+        0 0 25px rgba(255, 184, 90, 0.75),
+        0 4px 8px rgba(45, 15, 55, 0.55);
+
+    animation:
+        aparecerLetra
+        0.75s
+        cubic-bezier(
+            0.34,
+            1.56,
+            0.64,
+            1
+        )
+        forwards,
+
+        brilloLetra
+        3s
+        ease-in-out
+        infinite;
+}
+
+
+.espacio-titulo {
+    width: 24px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   ENTRADA DE LETRAS
+===================================================== */
+
+@keyframes aparecerLetra {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(-55px)
+            rotate(-8deg)
+            scale(0.5);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            translateY(6px)
+            rotate(2deg)
+            scale(1.12);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   BRILLO PERMANENTE DEL TÍTULO
+===================================================== */
+
+@keyframes brilloLetra {
+
+    0%,
+    100% {
+        text-shadow:
+            0 0 5px rgba(255, 255, 255, 0.9),
+            0 0 12px rgba(255, 224, 145, 0.75),
+            0 0 22px rgba(255, 184, 90, 0.55),
+            0 4px 8px rgba(45, 15, 55, 0.55);
+    }
+
+    50% {
+        text-shadow:
+            0 0 8px rgba(255, 255, 255, 1),
+            0 0 20px rgba(255, 232, 160, 1),
+            0 0 38px rgba(255, 184, 90, 0.9),
+            0 4px 8px rgba(45, 15, 55, 0.55);
+    }
+}
+
+
+/* =====================================================
+   MENSAJE
+===================================================== */
+
+.mensaje-cumpleanos {
+    position: absolute;
+
+    top: 27%;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        min(
+            820px,
+            78vw
+        );
+
+    z-index: 5;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   BLOQUES DEL MENSAJE
+===================================================== */
+
+.bloque-mensaje {
+    margin-bottom: 18px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(
+            20px,
+            1.6vw,
+            26px
+        );
+
+    line-height: 1.55;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
+
+    text-shadow:
+        0 2px 5px
+        rgba(
+            20,
+            8,
+            30,
+            0.95
+        ),
+
+        0 0 12px
+        rgba(
+            50,
+            20,
+            70,
+            0.70
+        );
+
+    opacity: 0;
+
+    transform:
+        translateY(22px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+
+.bloque-mensaje.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =====================================================
+   CIERRE DEL MENSAJE
+===================================================== */
+
+.cierre-mensaje {
+    margin-top: 25px;
+
+    margin-bottom: 7px;
+
+    font-size:
+        clamp(
+            20px,
+            1.8vw,
+            27px
+        );
+
+    font-weight: 700;
+
+    color: #fff0bc;
+}
+
+
+.firma-mensaje {
+    margin-bottom: 0;
+
+    font-size:
+        clamp(
+            18px,
+            1.6vw,
+            24px
+        );
+
+    font-weight: 700;
+
+    color: #ffd1e7;
+}
+
+
+/* =====================================================
+   DESTELLOS
+===================================================== */
+
+.capa-destellos {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 3;
+}
+
+
+.destello {
+    position: absolute;
+
+    width: var(--tamano);
+    height: var(--tamano);
+
+    border-radius: 50%;
+
+    background: #fffbea;
+
+    opacity: 0;
+
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 1),
+        0 0 16px rgba(255, 246, 190, 1),
+        0 0 28px rgba(255, 210, 120, 0.95),
+        0 0 45px rgba(255, 165, 100, 0.65);
+
+    animation:
+        brillarDestello
+        var(--duracion)
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        var(--retraso);
+}
+
+
+.destello::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width:
+        calc(
+            var(--tamano) * 6
+        );
+
+    height: 2px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.35),
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.35),
+            transparent
+        );
+
+    box-shadow:
+        0 0 8px
+        rgba(255, 245, 190, 0.75);
+}
+
+
+.destello::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 2px;
+
+    height:
+        calc(
+            var(--tamano) * 6
+        );
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(255, 255, 255, 0.35),
+            rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0.35),
+            transparent
+        );
+
+    box-shadow:
+        0 0 8px
+        rgba(255, 245, 190, 0.75);
+}
+
+
+@keyframes brillarDestello {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(0.2)
+            rotate(0deg);
+    }
+
+    20% {
+        opacity: 0;
+    }
+
+    38% {
+        opacity: 0.65;
+
+        transform:
+            scale(0.75)
+            rotate(20deg);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            scale(1.7)
+            rotate(45deg);
+    }
+
+    62% {
+        opacity: 0.85;
+
+        transform:
+            scale(1.25)
+            rotate(65deg);
+    }
+
+    78% {
+        opacity: 0.35;
+
+        transform:
+            scale(0.7)
+            rotate(85deg);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            scale(0.2)
+            rotate(100deg);
+    }
+}
+
+
+/* =====================================================
+   CIERRE FINAL
+   ES EL MISMO ELEMENTO PARA PC Y CELULAR
+===================================================== */
+
+.cierre-cumpleanos {
+    position: absolute;
+
+    left: 50%;
+    bottom: 8%;
+
+    transform:
+        translateX(-50%)
+        translateY(20px)
+        scale(0.9);
+
+    width: 90%;
+
+    z-index: 8;
+
+    text-align: center;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.cierre-cumpleanos p {
+    margin: 0;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(
+            22px,
+            2.2vw,
+            34px
+        );
+
+    font-weight: 700;
+
+    color: #fff4c7;
+
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 1),
+        0 0 18px rgba(255, 220, 130, 0.95),
+        0 0 32px rgba(255, 175, 80, 0.75),
+        0 4px 8px rgba(50, 20, 40, 0.65);
+}
+
+
+/* PC */
+
+.cierre-cumpleanos.visible {
+    animation:
+        aparecerCierre
+        0.8s
+        ease-out
+        forwards,
+
+        desaparecerCierre
+        0.8s
+        ease-in
+        8.6s
+        forwards;
+}
+
+
+@keyframes aparecerCierre {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(20px)
+            scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes desaparecerCierre {
+
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+/* =====================================================
+   CAPA DE CELEBRACIÓN
+===================================================== */
+
+.capa-celebracion {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 7;
+}
+
+
+/* =====================================================
+   PARTÍCULAS FINALES
+===================================================== */
+
+.particula-celebracion {
+    position: absolute;
+
+    bottom: -40px;
+    left: var(--x);
+
+    font-size:
+        var(--tamano);
+
+    color:
+        var(--color);
+
+    opacity: 0;
+
+    text-shadow:
+        0 0 8px currentColor,
+        0 0 16px currentColor,
+        0 0 28px currentColor;
+
+    filter:
+        drop-shadow(
+            0 0 8px currentColor
+        );
+
+    animation:
+        subirCelebracion
+        var(--duracion)
+        cubic-bezier(
+            0.15,
+            0.65,
+            0.25,
+            1
+        )
+        forwards;
+}
+
+
+@keyframes subirCelebracion {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(0)
+            translateX(0)
+            rotate(0deg)
+            scale(0.5);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    45% {
+        opacity: 1;
+
+        transform:
+            translateY(
+                calc(
+                    var(--altura) * 0.55
+                )
+            )
+            translateX(
+                calc(
+                    var(--desplazamiento) * 0.6
+                )
+            )
+            rotate(
+                calc(
+                    var(--giro) * 0.45
+                )
+            )
+            scale(1.25);
+    }
+
+    75% {
+        opacity: 0.95;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(
+                var(--altura)
+            )
+            translateX(
+                var(--desplazamiento)
+            )
+            rotate(
+                var(--giro)
+            )
+            scale(0.8);
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   CELULAR
+===================================================== */
+
+@media (max-width: 800px) {
+
+    html,
+    body {
+        width: 100%;
+
+        height: auto;
+
+        min-height: 100%;
+    }
+
+
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+
+    /*
+        La escena crece con el contenido.
+        Así nunca termina el bosque antes
+        que el mensaje.
+    */
+
+    .felicitacion {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: 100svh;
+
+        padding:
+            35px 20px 100px;
+
+        overflow: visible;
+
+        background-size: cover;
+
+        background-position:
+            center center;
+    }
+
+
+    /* =========================================
+       TÍTULO MÓVIL
+    ========================================= */
+
+    .titulo-cumpleanos {
+        position: relative;
+
+        top: auto;
+        left: auto;
+
+        transform: none;
+
+        width: 100%;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 1px;
+
+        margin:
+            0 auto 55px;
+
+        padding: 0;
+
+        font-size: 29px;
+
+        line-height: 1.1;
+
+        white-space: normal;
+
+        text-align: center;
+    }
+
+
+    .espacio-titulo {
+        width: 10px;
+    }
+
+
+    /* =========================================
+       MENSAJE MÓVIL
+    ========================================= */
+
+    .mensaje-cumpleanos {
+        position: relative;
+
+        top: auto;
+        left: auto;
+
+        transform: none;
+
+        width: 88%;
+
+        margin:
+            0 auto;
+
+        text-align: center;
+    }
+
+
+    .bloque-mensaje {
+        margin-bottom: 20px;
+
+        font-size: 15px;
+
+        line-height: 1.5;
+    }
+
+
+    .cierre-mensaje {
+        margin-top: 28px;
+
+        margin-bottom: 8px;
+
+        font-size: 18px;
+    }
+
+
+    .firma-mensaje {
+        margin-bottom: 0;
+
+        font-size: 17px;
+    }
+
+
+    /* =========================================
+       CIERRE FINAL MÓVIL
+    ========================================= */
+
+    .cierre-cumpleanos {
+        position: relative;
+
+        left: auto;
+        right: auto;
+
+        top: auto;
+        bottom: auto;
+
+        width: 88%;
+
+        margin:
+            70px auto 80px;
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+
+        text-align: center;
+    }
+
+
+    .cierre-cumpleanos p {
+        font-size: 19px;
+
+        line-height: 1.35;
+    }
+
+
+    /*
+        En móvil aparece y SE QUEDA.
+
+        No usamos la animación de
+        desaparición del escritorio.
+    */
+
+    .cierre-cumpleanos.visible {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+        animation: none;
+
+        transition:
+            opacity 0.9s ease,
+            transform 0.9s ease;
+    }
+
+
+    /* =========================================
+       DESTELLOS
+    ========================================= */
+
+    .capa-destellos {
+        position: fixed;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+    }
+
+
+    /* =========================================
+       CELEBRACIÓN
+    ========================================= */
+
+    .capa-celebracion {
+        position: fixed;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Un día especial</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <main class="escena">
+
+        <!-- ESTRELLAS -->
+        <div
+            class="capa-estrellas"
+            id="capa-estrellas"
+        ></div>
+
+
+        <!-- ESTRELLA FUGAZ -->
+        <div
+            class="capa-estrella-fugaz"
+            id="capa-estrella-fugaz"
+        ></div>
+
+
+        <!-- FRASES CAYENDO -->
+        <div
+            class="capa-frases"
+            id="capa-frases"
+        ></div>
+
+
+        <!-- CONFETI INTERACTIVO -->
+        <div
+            class="capa-confeti"
+            id="capa-confeti"
+        ></div>
+
+
+        <!-- ========================================
+             TARJETA PRINCIPAL
+        ========================================= -->
+
+        <section class="tarjeta">
+
+            <!-- COLUMNA IZQUIERDA -->
+            <div class="lado-texto">
+
+               <div
+    class="mensaje"
+    id="mensaje-espera"
+>
+
+    <p class="bloque-espera mensaje-inicio">
+        Hay días que se esperan
+        de una forma diferente. ❤️✨
+    </p>
+
+    <p class="bloque-espera">
+        Poco a poco nos acercamos
+        a uno de ellos... 🌙
+    </p>
+
+    <p class="bloque-espera">
+        Un día para celebrar tu vida,
+        todo lo que has recorrido
+        y el comienzo de un nuevo año
+        lleno de historias que todavía
+        están por escribirse. 🌸🦋
+    </p>
+
+    <p class="bloque-espera">
+        Mientras llega, disfruta la espera,
+        sigue soñando ✨ y recuerda que
+        siempre habrá personas deseando
+        verte cumplir cada una de tus metas. 🌟
+    </p>
+
+    <p class="bloque-espera mensaje-final">
+        Nosotros ya estamos contando
+        los días contigo. ❤️
+    </p>
+
+</div>
+
+                <!-- CONTADOR -->
+
+                <div class="zona-contador">
+
+                    <p
+                        class="contador-titulo contador-titulo-final"
+                         id="contador-titulo-final"
+                        >
+                        Todos esperamos el gran día... ⏳✨
+                        </p>
+
+
+                    <div
+                        class="contador"
+                        id="contador"
+                    >
+
+                        <div class="tarjeta-tiempo">
+
+                            <span
+                                class="numero"
+                                id="dias"
+                            >
+                                00
+                            </span>
+
+                            <span class="unidad">
+                                Días
+                            </span>
+
+                        </div>
+
+
+                        <div class="tarjeta-tiempo">
+
+                            <span
+                                class="numero"
+                                id="horas"
+                            >
+                                00
+                            </span>
+
+                            <span class="unidad">
+                                Horas
+                            </span>
+
+                        </div>
+
+
+                        <div class="tarjeta-tiempo">
+
+                            <span
+                                class="numero"
+                                id="minutos"
+                            >
+                                00
+                            </span>
+
+                            <span class="unidad">
+                                Minutos
+                            </span>
+
+                        </div>
+
+
+                        <div class="tarjeta-tiempo">
+
+                            <span
+                                class="numero"
+                                id="segundos"
+                            >
+                                00
+                            </span>
+
+                            <span class="unidad">
+                                Segundos
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 ÁRBOL
+            ========================================= -->
+
+            <div class="lado-arbol">
+
+                <svg
+                    class="arbol-svg"
+                    viewBox="0 0 500 560"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <!-- TRONCO -->
+
+                    <path
+                        class="rama-svg tronco-svg"
+                        pathLength="1"
+                        d="
+                            M250 545
+                            C244 500 246 455 248 410
+                            C249 375 249 345 250 315
+                        "
+                    />
+
+
+                    <!-- PRIMERA BIFURCACIÓN -->
+
+                    <path
+                        class="rama-svg rama-grande rama-1"
+                        pathLength="1"
+                        d="
+                            M250 315
+                            C228 296 211 275 198 251
+                            C185 227 177 203 170 179
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg rama-grande rama-2"
+                        pathLength="1"
+                        d="
+                            M250 315
+                            C273 295 291 273 304 249
+                            C317 225 325 201 333 177
+                        "
+                    />
+
+
+                    <!-- RAMAS MEDIAS -->
+
+                    <path
+                        class="rama-svg rama-media rama-3"
+                        pathLength="1"
+                        d="
+                            M226 282
+                            C204 269 185 251 169 231
+                            C157 216 146 200 137 183
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg rama-media rama-4"
+                        pathLength="1"
+                        d="
+                            M275 280
+                            C297 267 316 249 332 229
+                            C344 214 355 198 364 181
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg rama-media rama-5"
+                        pathLength="1"
+                        d="
+                            M211 270
+                            C197 247 190 223 187 198
+                            C184 174 183 151 176 129
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg rama-media rama-6"
+                        pathLength="1"
+                        d="
+                            M289 268
+                            C303 245 310 221 313 196
+                            C316 172 318 149 325 127
+                        "
+                    />
+
+
+                    <!-- RAMA CENTRAL -->
+
+                    <path
+                        class="rama-svg rama-media rama-7"
+                        pathLength="1"
+                        d="
+                            M250 315
+                            C248 283 249 250 251 218
+                            C252 186 252 156 251 126
+                        "
+                    />
+
+
+                    <!-- RAMIFICACIONES IZQUIERDAS -->
+
+                    <path
+                        class="rama-svg rama-fina rama-8"
+                        pathLength="1"
+                        d="
+                            M198 251
+                            C177 238 160 221 147 201
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg rama-fina rama-10"
+                        pathLength="1"
+                        d="
+                            M187 198
+                            C168 184 154 166 145 145
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg rama-fina rama-12"
+                        pathLength="1"
+                        d="
+                            M217 233
+                            C207 210 204 186 205 162
+                            C206 141 202 121 195 102
+                        "
+                    />
+
+
+                    <!-- RAMIFICACIONES DERECHAS -->
+
+                    <path
+                        class="rama-svg rama-fina rama-9"
+                        pathLength="1"
+                        d="
+                            M304 249
+                            C325 236 342 219 355 199
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg rama-fina rama-11"
+                        pathLength="1"
+                        d="
+                            M313 196
+                            C332 182 346 164 355 143
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg rama-fina rama-13"
+                        pathLength="1"
+                        d="
+                            M283 231
+                            C293 208 296 184 295 160
+                            C294 139 298 119 305 100
+                        "
+                    />
+
+
+                    <!-- RAMITAS SUPERIORES -->
+
+                    <path
+                        class="rama-svg ramita rama-14"
+                        pathLength="1"
+                        d="
+                            M205 162
+                            C191 147 180 130 173 111
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg ramita rama-15"
+                        pathLength="1"
+                        d="
+                            M295 160
+                            C309 145 320 128 327 109
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg ramita rama-16"
+                        pathLength="1"
+                        d="
+                            M251 190
+                            C237 173 230 153 229 132
+                        "
+                    />
+
+
+                    <path
+                        class="rama-svg ramita rama-17"
+                        pathLength="1"
+                        d="
+                            M251 190
+                            C265 173 272 153 273 132
+                        "
+                    />
+
+
+                    <!-- CORAZONES -->
+
+                    <g
+                        class="grupo-corazones"
+                        id="grupo-corazones"
+                    ></g>
+
+                </svg>
+
+            </div>
+
+            <div
+            class="celebracion-tarjeta"
+             id="celebracion-tarjeta"
+            ></div>
+
+
+        </section>
+
+
+        <!-- ========================================
+             BOTÓN DE CUMPLEAÑOS
+             FUERA DE LA TARJETA
+        ========================================= -->
+
+        <button
+            id="boton-sorpresa"
+            class="boton-sorpresa"
+            type="button"
+            aria-label="Felicidades, mi niña"
+        >
+
+            <span class="dedos-huella">
+
+                <span class="dedo dedo-1"></span>
+                <span class="dedo dedo-2"></span>
+                <span class="dedo dedo-3"></span>
+                <span class="dedo dedo-4"></span>
+
+            </span>
+
+
+            <span class="almohadilla-huella">
+
+                <span class="texto-huella">
+                    Felicidades
+                    <strong>mi niña</strong>
+                    Presioname
+                </span>
+
+            </span>
+
+        </button>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
