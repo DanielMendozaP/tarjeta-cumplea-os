@@ -1706,15 +1706,6 @@ margin-bottom: 8px;
             }
             }
 
-.corazon-arbol {
-    animation:
-        florecerCorazon
-        0.4s
-        ease-out
-        forwards;
-
-    filter: none;
-}
 
 
 
