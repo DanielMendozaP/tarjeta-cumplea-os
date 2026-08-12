@@ -928,7 +928,7 @@ body {
     ========================================= */
 
     .capa-destellos {
-        position: fixed;
+        position: absolute;
 
         inset: 0;
 
