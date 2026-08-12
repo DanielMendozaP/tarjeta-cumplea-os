@@ -493,12 +493,19 @@ function crearCorazonesArbol() {
     const namespace =
         "http://www.w3.org/2000/svg";
 
-     const cantidad =
-        window.innerWidth <= 800
-            ? 150
+
+    const esCelular =
+        window.innerWidth <= 800;
+
+
+    const cantidad =
+        esCelular
+            ? 180
             : 750;
 
+
     let creados = 0;
+
 
     while (creados < cantidad) {
 
@@ -506,13 +513,16 @@ function crearCorazonesArbol() {
             65 +
             Math.random() * 370;
 
+
         const y =
             30 +
             Math.random() * 330;
 
+
         if (!dentroDeCopa(x, y)) {
             continue;
         }
+
 
         const corazon =
             document.createElementNS(
@@ -520,41 +530,45 @@ function crearCorazonesArbol() {
                 "text"
             );
 
+
         corazon.classList.add(
             "corazon-arbol"
         );
+
 
         corazon.setAttribute(
             "x",
             x
         );
 
+
         corazon.setAttribute(
             "y",
             y
         );
+
 
         corazon.setAttribute(
             "text-anchor",
             "middle"
         );
 
+
         corazon.setAttribute(
             "dominant-baseline",
             "middle"
         );
 
-        corazon.textContent = "♥";
 
+        corazon.textContent =
+            "♥";
 
-        /*
-            Damos prioridad visual
-            a la zona central e inferior
-            de la copa.
-        */
 
         const distanciaCentro =
-            Math.abs(x - 250);
+            Math.abs(
+                x - 250
+            );
+
 
         const zonaCentral =
             distanciaCentro < 115
@@ -564,42 +578,89 @@ function crearCorazonesArbol() {
 
         let tamano;
 
-        if (zonaCentral) {
+
+        if (esCelular) {
 
             /*
-                Aquí colocamos corazones
-                más grandes para tapar
-                mejor tronco y ramas.
+                MÓVIL
             */
 
-            tamano =
-                19 +
-                Math.random() * 18;
-
-        } else {
-
-            const probabilidad =
-                Math.random();
-
-            if (probabilidad < 0.30) {
+            if (zonaCentral) {
 
                 tamano =
-                    10 +
-                    Math.random() * 7;
-
-            } else if (
-                probabilidad < 0.75
-            ) {
-
-                tamano =
-                    17 +
-                    Math.random() * 9;
+                    28 +
+                    Math.random() * 18;
 
             } else {
 
+                const probabilidad =
+                    Math.random();
+
+
+                if (
+                    probabilidad < 0.30
+                ) {
+
+                    tamano =
+                        14 +
+                        Math.random() * 8;
+
+                } else if (
+                    probabilidad < 0.72
+                ) {
+
+                    tamano =
+                        24 +
+                        Math.random() * 12;
+
+                } else {
+
+                    tamano =
+                        36 +
+                        Math.random() * 16;
+                }
+            }
+
+        } else {
+
+            /*
+                PC
+            */
+
+            if (zonaCentral) {
+
                 tamano =
-                    26 +
-                    Math.random() * 12;
+                    19 +
+                    Math.random() * 18;
+
+            } else {
+
+                const probabilidad =
+                    Math.random();
+
+
+                if (
+                    probabilidad < 0.30
+                ) {
+
+                    tamano =
+                        10 +
+                        Math.random() * 7;
+
+                } else if (
+                    probabilidad < 0.75
+                ) {
+
+                    tamano =
+                        17 +
+                        Math.random() * 9;
+
+                } else {
+
+                    tamano =
+                        26 +
+                        Math.random() * 12;
+                }
             }
         }
 
@@ -619,6 +680,7 @@ function crearCorazonesArbol() {
                 )
             ];
 
+
         corazon.setAttribute(
             "fill",
             color
@@ -628,6 +690,7 @@ function crearCorazonesArbol() {
         const rotacion =
             -18 +
             Math.random() * 36;
+
 
         corazon.style.setProperty(
             "--rotacion",
@@ -639,6 +702,7 @@ function crearCorazonesArbol() {
             2700 +
             Math.random() * 3500;
 
+
         corazon.style.animationDelay =
             `${retraso}ms`;
 
@@ -646,6 +710,7 @@ function crearCorazonesArbol() {
         grupoCorazones.appendChild(
             corazon
         );
+
 
         creados++;
     }
@@ -1265,3 +1330,6 @@ setTimeout(
     lanzarExplosionTarjeta,
     10300
 );
+
+
+
