@@ -495,7 +495,7 @@ function crearCorazonesArbol() {
 
      const cantidad =
         window.innerWidth <= 800
-            ? 250
+            ? 150
             : 750;
 
     let creados = 0;
