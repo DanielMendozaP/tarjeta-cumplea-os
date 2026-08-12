@@ -1,969 +1,1267 @@
 /* =====================================================
-   RESET
+   FECHA DEL CUMPLEAÑOS
 ===================================================== */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-}
-
-
-body {
-    overflow: hidden;
-
-    background: #140d28;
-}
+const fechaCumpleanos =
+    new Date(
+        2026,
+        7,
+        25,
+        0,
+        0,
+        0
+    );
 
 
 /* =====================================================
-   ESCENA
+   CONTADOR
 ===================================================== */
 
-.felicitacion {
-    position: relative;
+const diasElemento =
+    document.getElementById("dias");
 
-    width: 100%;
-    height: 100vh;
+const horasElemento =
+    document.getElementById("horas");
 
-    overflow: hidden;
+const minutosElemento =
+    document.getElementById("minutos");
 
-    background-image:
-        url("assets/fondo-bebe.png");
+const segundosElemento =
+    document.getElementById("segundos");
 
-    background-size: cover;
+const contador =
+    document.getElementById(
+        "contador"
+    );
 
-    background-position: center;
+const botonSorpresa =
+    document.getElementById(
+        "boton-sorpresa"
+    );
 
-    background-repeat: no-repeat;
-}
+
+function actualizarContador() {
+
+    const ahora =
+        new Date();
+
+    const diferencia =
+        fechaCumpleanos.getTime()
+        -
+        ahora.getTime();
 
 
-/* =====================================================
-   TÍTULO
-===================================================== */
+    if (diferencia <= 0) {
 
-.titulo-cumpleanos {
-    position: absolute;
+        diasElemento.textContent =
+            "00";
 
-    top: 6%;
-    left: 50%;
+        horasElemento.textContent =
+            "00";
 
-    transform:
-        translateX(-50%);
+        minutosElemento.textContent =
+            "00";
 
-    width: 94%;
+        segundosElemento.textContent =
+            "00";
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    gap: 3px;
+        /*
+            No ocultamos nada.
+            Solo mostramos la huella.
+        */
 
-    margin: 0;
+        botonSorpresa.style.display =
+            "block";
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
 
-    font-size:
-        clamp(
-            42px,
-            5.5vw,
-            82px
+        /*
+            Detenemos esta ejecución.
+        */
+
+        return;
+    }
+
+
+    const segundo =
+        1000;
+
+    const minuto =
+        segundo * 60;
+
+    const hora =
+        minuto * 60;
+
+    const dia =
+        hora * 24;
+
+
+    const dias =
+        Math.floor(
+            diferencia / dia
         );
 
-    font-weight: 700;
 
-    line-height: 1;
+    const horas =
+        Math.floor(
+            (
+                diferencia % dia
+            )
+            / hora
+        );
 
-    white-space: nowrap;
 
-    color: #fff4c7;
+    const minutos =
+        Math.floor(
+            (
+                diferencia % hora
+            )
+            / minuto
+        );
 
-    text-align: center;
 
-    pointer-events: none;
+    const segundos =
+        Math.floor(
+            (
+                diferencia % minuto
+            )
+            / segundo
+        );
 
-    z-index: 5;
+
+    diasElemento.textContent =
+        String(dias)
+            .padStart(
+                2,
+                "0"
+            );
+
+
+    horasElemento.textContent =
+        String(horas)
+            .padStart(
+                2,
+                "0"
+            );
+
+
+    minutosElemento.textContent =
+        String(minutos)
+            .padStart(
+                2,
+                "0"
+            );
+
+
+    segundosElemento.textContent =
+        String(segundos)
+            .padStart(
+                2,
+                "0"
+            );
 }
 
 
 /* =====================================================
-   LETRAS DEL TÍTULO
+   ESTRELLAS
 ===================================================== */
 
-.letra-cumpleanos {
-    display: inline-block;
+const capaEstrellas =
+    document.getElementById(
+        "capa-estrellas"
+    );
 
-    opacity: 0;
 
-    transform:
-        translateY(-55px)
-        rotate(-8deg)
-        scale(0.5);
+function crearEstrellas() {
 
-    text-shadow:
-        0 0 5px rgba(255, 255, 255, 1),
-        0 0 12px rgba(255, 224, 145, 0.95),
-        0 0 25px rgba(255, 184, 90, 0.75),
-        0 4px 8px rgba(45, 15, 55, 0.55);
+    const cantidad =
+    window.innerWidth <= 800
+        ? 28
+        : 65;
 
-    animation:
-        aparecerLetra
-        0.75s
-        cubic-bezier(
-            0.34,
-            1.56,
-            0.64,
-            1
+
+    for (
+        let i = 0;
+        i < cantidad;
+        i++
+    ) {
+
+        const estrella =
+            document.createElement(
+                "span"
+            );
+
+
+        estrella.classList.add(
+            "estrella"
+        );
+
+
+        estrella.style.left =
+            `${Math.random() * 100}%`;
+
+
+        estrella.style.top =
+            `${Math.random() * 70}%`;
+
+
+        const tamano =
+            2.5
+            +
+            Math.random() * 3.5;
+
+
+        estrella.style.width =
+            `${tamano}px`;
+
+
+        estrella.style.height =
+            `${tamano}px`;
+
+
+        estrella.style.animationDuration =
+            `${
+                2
+                +
+                Math.random() * 3
+            }s`;
+
+
+        estrella.style.animationDelay =
+            `${
+                Math.random() * 4
+            }s`;
+
+
+        capaEstrellas.appendChild(
+            estrella
+        );
+    }
+}
+
+
+/* =====================================================
+   ESTRELLA FUGAZ
+===================================================== */
+
+const capaEstrellaFugaz =
+    document.getElementById(
+        "capa-estrella-fugaz"
+    );
+
+
+function crearEstrellaFugaz() {
+
+    const estrella =
+        document.createElement(
+            "span"
+        );
+
+
+    estrella.classList.add(
+        "estrella-fugaz"
+    );
+
+
+    estrella.style.left =
+        `${
+            5
+            +
+            Math.random() * 35
+        }%`;
+
+
+    estrella.style.top =
+        `${
+            5
+            +
+            Math.random() * 25
+        }%`;
+
+
+    capaEstrellaFugaz.appendChild(
+        estrella
+    );
+
+
+    setTimeout(
+        () => {
+
+            estrella.remove();
+
+        },
+        1600
+    );
+}
+
+
+/* =====================================================
+   FRASES
+===================================================== */
+
+const capaFrases =
+    document.getElementById(
+        "capa-frases"
+    );
+
+
+const frasesBonitas = [
+
+    "Sigue brillando ✨",
+
+    "Confía en ti 🌟",
+
+    "Nunca dejes de soñar 💫",
+
+    "Disfruta tu camino 🌸",
+
+    "Vienen cosas bonitas 💖",
+
+    "Cree en lo que puedes lograr ✨",
+
+    "Cada día cuenta 🌷",
+
+    "Sonríe 😊",
+
+    "Todo lo bueno está por venir 🌟",
+
+    "Sigue creciendo 🦋",
+
+    "Cumple tus sueños 💫",
+
+    "Disfruta cada etapa 🌸",
+
+    "Hoy falta menos ❤️",
+
+    "Un nuevo año te espera ✨",
+
+    "Nunca dejes de creer en ti 💖"
+
+];
+
+
+function crearFraseCayendo() {
+
+    const frase =
+        document.createElement(
+            "span"
+        );
+
+
+    frase.classList.add(
+        "frase-cayendo"
+    );
+
+
+    frase.textContent =
+        frasesBonitas[
+            Math.floor(
+                Math.random()
+                *
+                frasesBonitas.length
+            )
+        ];
+
+
+   const esCelular =
+    window.innerWidth <= 800;
+
+
+if (esCelular) {
+
+    frase.style.left =
+        `${
+            Math.random() * 92
+        }%`;
+
+} else {
+
+    frase.style.left =
+        `${
+            4
+            +
+            Math.random() * 82
+        }%`;
+}
+
+
+    frase.style.fontSize =
+    window.innerWidth <= 800
+        ? `${11 + Math.random() * 3}px`
+        : `${13 + Math.random() * 8}px`;
+
+
+    const duracion =
+        14
+        +
+        Math.random() * 6;
+
+
+    frase.style.animationDuration =
+        `${duracion}s`;
+
+
+    capaFrases.appendChild(
+        frase
+    );
+
+
+    setTimeout(
+        () => {
+
+            frase.remove();
+
+        },
+        duracion * 1000
+    );
+}
+
+
+/* =====================================================
+   CORAZONES DEL ÁRBOL
+===================================================== */
+
+const grupoCorazones =
+    document.getElementById(
+        "grupo-corazones"
+    );
+
+
+const coloresCorazon = [
+
+    "#ff1744",
+    "#ff3158",
+    "#ff5271",
+    "#ff7189",
+    "#e60046",
+    "#d91654",
+    "#ff8da0",
+    "#ffb0bd"
+];
+
+
+/*
+    Esta función determina la forma
+    general de la copa.
+
+    No hacemos simplemente un rectángulo
+    lleno de corazones.
+*/
+
+function dentroDeCopa(x, y) {
+
+    const centroX = 250;
+    const centroY = 195;
+
+    const escalaX =
+        (x - centroX) / 172;
+
+    const escalaY =
+        (195 - y) / 150;
+
+    const formula =
+        Math.pow(
+            escalaX * escalaX
+            +
+            escalaY * escalaY
+            -
+            1,
+            3
         )
-        forwards,
-
-        brilloLetra
-        3s
-        ease-in-out
-        infinite;
-}
-
-
-.espacio-titulo {
-    width: 24px;
-
-    flex-shrink: 0;
-}
-
-
-/* =====================================================
-   ENTRADA DE LETRAS
-===================================================== */
-
-@keyframes aparecerLetra {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translateY(-55px)
-            rotate(-8deg)
-            scale(0.5);
-    }
-
-    70% {
-        opacity: 1;
-
-        transform:
-            translateY(6px)
-            rotate(2deg)
-            scale(1.12);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            rotate(0deg)
-            scale(1);
-    }
-}
-
-
-/* =====================================================
-   BRILLO PERMANENTE DEL TÍTULO
-===================================================== */
-
-@keyframes brilloLetra {
-
-    0%,
-    100% {
-        text-shadow:
-            0 0 5px rgba(255, 255, 255, 0.9),
-            0 0 12px rgba(255, 224, 145, 0.75),
-            0 0 22px rgba(255, 184, 90, 0.55),
-            0 4px 8px rgba(45, 15, 55, 0.55);
-    }
-
-    50% {
-        text-shadow:
-            0 0 8px rgba(255, 255, 255, 1),
-            0 0 20px rgba(255, 232, 160, 1),
-            0 0 38px rgba(255, 184, 90, 0.9),
-            0 4px 8px rgba(45, 15, 55, 0.55);
-    }
-}
-
-
-/* =====================================================
-   MENSAJE
-===================================================== */
-
-.mensaje-cumpleanos {
-    position: absolute;
-
-    top: 27%;
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        min(
-            820px,
-            78vw
+        -
+        escalaX
+        *
+        escalaX
+        *
+        Math.pow(
+            escalaY,
+            3
         );
 
-    z-index: 5;
-
-    text-align: center;
-
-    pointer-events: none;
+    return (
+        formula <= 0
+        &&
+        y > 25
+        &&
+        y < 355
+    );
 }
 
 
-/* =====================================================
-   BLOQUES DEL MENSAJE
-===================================================== */
+function crearCorazonesArbol() {
 
-.bloque-mensaje {
-    margin-bottom: 18px;
+    const namespace =
+        "http://www.w3.org/2000/svg";
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+     const cantidad =
+        window.innerWidth <= 800
+            ? 150
+            : 750;
 
-    font-size:
-        clamp(
-            20px,
-            1.6vw,
-            26px
+    let creados = 0;
+
+    while (creados < cantidad) {
+
+        const x =
+            65 +
+            Math.random() * 370;
+
+        const y =
+            30 +
+            Math.random() * 330;
+
+        if (!dentroDeCopa(x, y)) {
+            continue;
+        }
+
+        const corazon =
+            document.createElementNS(
+                namespace,
+                "text"
+            );
+
+        corazon.classList.add(
+            "corazon-arbol"
         );
 
-    line-height: 1.55;
-
-    color:
-        rgba(
-            255,
-            255,
-            255,
-            0.96
+        corazon.setAttribute(
+            "x",
+            x
         );
 
-    text-shadow:
-        0 2px 5px
-        rgba(
-            20,
-            8,
-            30,
-            0.95
-        ),
-
-        0 0 12px
-        rgba(
-            50,
-            20,
-            70,
-            0.70
+        corazon.setAttribute(
+            "y",
+            y
         );
 
-    opacity: 0;
-
-    transform:
-        translateY(22px);
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease;
-}
-
-
-.bloque-mensaje.visible {
-    opacity: 1;
-
-    transform:
-        translateY(0);
-}
-
-
-/* =====================================================
-   CIERRE DEL MENSAJE
-===================================================== */
-
-.cierre-mensaje {
-    margin-top: 25px;
-
-    margin-bottom: 7px;
-
-    font-size:
-        clamp(
-            20px,
-            1.8vw,
-            27px
+        corazon.setAttribute(
+            "text-anchor",
+            "middle"
         );
 
-    font-weight: 700;
-
-    color: #fff0bc;
-}
-
-
-.firma-mensaje {
-    margin-bottom: 0;
-
-    font-size:
-        clamp(
-            18px,
-            1.6vw,
-            24px
+        corazon.setAttribute(
+            "dominant-baseline",
+            "middle"
         );
 
-    font-weight: 700;
-
-    color: #ffd1e7;
-}
+        corazon.textContent = "♥";
 
 
-/* =====================================================
-   DESTELLOS
-===================================================== */
+        /*
+            Damos prioridad visual
+            a la zona central e inferior
+            de la copa.
+        */
 
-.capa-destellos {
-    position: absolute;
+        const distanciaCentro =
+            Math.abs(x - 250);
 
-    inset: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
-    z-index: 3;
-}
+        const zonaCentral =
+            distanciaCentro < 115
+            &&
+            y > 130;
 
 
-.destello {
-    position: absolute;
+        let tamano;
 
-    width: var(--tamano);
-    height: var(--tamano);
+        if (zonaCentral) {
 
-    border-radius: 50%;
+            /*
+                Aquí colocamos corazones
+                más grandes para tapar
+                mejor tronco y ramas.
+            */
 
-    background: #fffbea;
+            tamano =
+                19 +
+                Math.random() * 18;
 
-    opacity: 0;
+        } else {
 
-    box-shadow:
-        0 0 8px rgba(255, 255, 255, 1),
-        0 0 16px rgba(255, 246, 190, 1),
-        0 0 28px rgba(255, 210, 120, 0.95),
-        0 0 45px rgba(255, 165, 100, 0.65);
+            const probabilidad =
+                Math.random();
 
-    animation:
-        brillarDestello
-        var(--duracion)
-        ease-in-out
-        infinite;
+            if (probabilidad < 0.30) {
 
-    animation-delay:
-        var(--retraso);
-}
+                tamano =
+                    10 +
+                    Math.random() * 7;
+
+            } else if (
+                probabilidad < 0.75
+            ) {
+
+                tamano =
+                    17 +
+                    Math.random() * 9;
+
+            } else {
+
+                tamano =
+                    26 +
+                    Math.random() * 12;
+            }
+        }
 
 
-.destello::before {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width:
-        calc(
-            var(--tamano) * 6
+        corazon.setAttribute(
+            "font-size",
+            tamano
         );
 
-    height: 2px;
 
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.35),
-            rgba(255, 255, 255, 1),
-            rgba(255, 255, 255, 0.35),
-            transparent
-        );
-
-    box-shadow:
-        0 0 8px
-        rgba(255, 245, 190, 0.75);
-}
-
-
-.destello::after {
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    width: 2px;
-
-    height:
-        calc(
-            var(--tamano) * 6
-        );
-
-    transform:
-        translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent,
-            rgba(255, 255, 255, 0.35),
-            rgba(255, 255, 255, 1),
-            rgba(255, 255, 255, 0.35),
-            transparent
-        );
-
-    box-shadow:
-        0 0 8px
-        rgba(255, 245, 190, 0.75);
-}
-
-
-@keyframes brillarDestello {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            scale(0.2)
-            rotate(0deg);
-    }
-
-    20% {
-        opacity: 0;
-    }
-
-    38% {
-        opacity: 0.65;
-
-        transform:
-            scale(0.75)
-            rotate(20deg);
-    }
-
-    50% {
-        opacity: 1;
-
-        transform:
-            scale(1.7)
-            rotate(45deg);
-    }
-
-    62% {
-        opacity: 0.85;
-
-        transform:
-            scale(1.25)
-            rotate(65deg);
-    }
-
-    78% {
-        opacity: 0.35;
-
-        transform:
-            scale(0.7)
-            rotate(85deg);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            scale(0.2)
-            rotate(100deg);
-    }
-}
-
-
-/* =====================================================
-   CIERRE FINAL
-   ES EL MISMO ELEMENTO PARA PC Y CELULAR
-===================================================== */
-
-.cierre-cumpleanos {
-    position: absolute;
-
-    left: 50%;
-    bottom: 8%;
-
-    transform:
-        translateX(-50%)
-        translateY(20px)
-        scale(0.9);
-
-    width: 90%;
-
-    z-index: 8;
-
-    text-align: center;
-
-    opacity: 0;
-
-    pointer-events: none;
-}
-
-
-.cierre-cumpleanos p {
-    margin: 0;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(
-            22px,
-            2.2vw,
-            34px
-        );
-
-    font-weight: 700;
-
-    color: #fff4c7;
-
-    text-shadow:
-        0 0 8px rgba(255, 255, 255, 1),
-        0 0 18px rgba(255, 220, 130, 0.95),
-        0 0 32px rgba(255, 175, 80, 0.75),
-        0 4px 8px rgba(50, 20, 40, 0.65);
-}
-
-
-/* PC */
-
-.cierre-cumpleanos.visible {
-    animation:
-        aparecerCierre
-        0.8s
-        ease-out
-        forwards,
-
-        desaparecerCierre
-        0.8s
-        ease-in
-        8.6s
-        forwards;
-}
-
-
-@keyframes aparecerCierre {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateX(-50%)
-            translateY(20px)
-            scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateX(-50%)
-            translateY(0)
-            scale(1);
-    }
-}
-
-
-@keyframes desaparecerCierre {
-
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
-
-/* =====================================================
-   CAPA DE CELEBRACIÓN
-===================================================== */
-
-.capa-celebracion {
-    position: absolute;
-
-    inset: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
-    z-index: 7;
-}
-
-
-/* =====================================================
-   PARTÍCULAS FINALES
-===================================================== */
-
-.particula-celebracion {
-    position: absolute;
-
-    bottom: -40px;
-    left: var(--x);
-
-    font-size:
-        var(--tamano);
-
-    color:
-        var(--color);
-
-    opacity: 0;
-
-    text-shadow:
-        0 0 8px currentColor,
-        0 0 16px currentColor,
-        0 0 28px currentColor;
-
-    filter:
-        drop-shadow(
-            0 0 8px currentColor
-        );
-
-    animation:
-        subirCelebracion
-        var(--duracion)
-        cubic-bezier(
-            0.15,
-            0.65,
-            0.25,
-            1
-        )
-        forwards;
-}
-
-
-@keyframes subirCelebracion {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translateY(0)
-            translateX(0)
-            rotate(0deg)
-            scale(0.5);
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    45% {
-        opacity: 1;
-
-        transform:
-            translateY(
-                calc(
-                    var(--altura) * 0.55
+        const color =
+            coloresCorazon[
+                Math.floor(
+                    Math.random()
+                    *
+                    coloresCorazon.length
                 )
-            )
-            translateX(
-                calc(
-                    var(--desplazamiento) * 0.6
-                )
-            )
-            rotate(
-                calc(
-                    var(--giro) * 0.45
-                )
-            )
-            scale(1.25);
-    }
+            ];
 
-    75% {
-        opacity: 0.95;
-    }
+        corazon.setAttribute(
+            "fill",
+            color
+        );
 
-    100% {
-        opacity: 0;
 
-        transform:
-            translateY(
-                var(--altura)
-            )
-            translateX(
-                var(--desplazamiento)
-            )
-            rotate(
-                var(--giro)
-            )
-            scale(0.8);
+        const rotacion =
+            -18 +
+            Math.random() * 36;
+
+        corazon.style.setProperty(
+            "--rotacion",
+            `${rotacion}deg`
+        );
+
+
+        const retraso =
+            2700 +
+            Math.random() * 3500;
+
+        corazon.style.animationDelay =
+            `${retraso}ms`;
+
+
+        grupoCorazones.appendChild(
+            corazon
+        );
+
+        creados++;
     }
 }
 
-
 /* =====================================================
-   RESPONSIVE
-   CELULAR
+   INICIO
 ===================================================== */
 
-@media (max-width: 800px) {
+actualizarContador();
 
-    html,
-    body {
-        width: 100%;
-
-        height: auto;
-
-        min-height: 100%;
-    }
+setInterval(
+    actualizarContador,
+    1000
+);
 
 
-    body {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
+crearEstrellas();
+
+
+crearEstrellaFugaz();
+
+const intervaloEstrellaFugaz =
+    window.innerWidth <= 800
+        ? 4000
+        : 2000;
+
+setInterval(
+    crearEstrellaFugaz,
+    intervaloEstrellaFugaz
+);
+
+
+setTimeout(
+    crearFraseCayendo,
+    700
+);
+
+const intervaloFrases =
+    window.innerWidth <= 800
+        ? 5000
+        : 3000;
+
+
+setInterval(
+    crearFraseCayendo,
+    intervaloFrases
+);
+
+
+crearCorazonesArbol();
+
+/* =====================================================
+   CONFETI DE CORAZONES
+===================================================== */
+
+const capaConfeti =
+    document.getElementById(
+        "capa-confeti"
+    );
+
+
+const coloresConfeti = [
+    "#ff1744",
+    "#ff3d68",
+    "#ff5c8a",
+    "#ff80a5",
+    "#e91e63",
+    "#d81b60",
+    "#ffb0c3",
+    "#ffffff"
+];
+
+
+function explosionCorazones(
+    x,
+    y
+) {
+
+    /*
+        Primero aparece un corazón
+        exactamente donde tocamos.
+    */
+
+    const corazonPrincipal =
+        document.createElement(
+            "span"
+        );
+
+
+    corazonPrincipal.classList.add(
+        "corazon-toque"
+    );
+
+
+    corazonPrincipal.textContent =
+        "♥";
+
+
+    corazonPrincipal.style.left =
+        `${x}px`;
+
+
+    corazonPrincipal.style.top =
+        `${y}px`;
+
+
+    capaConfeti.appendChild(
+        corazonPrincipal
+    );
 
 
     /*
-        La escena crece con el contenido.
-        Así nunca termina el bosque antes
-        que el mensaje.
+        Esperamos un instante.
+
+        Después el corazón principal
+        desaparece y nacen las partículas.
     */
 
-    .felicitacion {
-        position: relative;
+    setTimeout(
+        () => {
 
-        width: 100%;
+            corazonPrincipal.remove();
 
-        height: auto;
+            crearParticulasCorazon(
+                x,
+                y
+            );
 
-        min-height: 100svh;
-
-        padding:
-            35px 20px 100px;
-
-        overflow: visible;
-
-        background-size: cover;
-
-        background-position:
-            center center;
-    }
-
-
-.corazon-arbol {
-    animation:
-        florecerCorazon
-        0.4s
-        ease-out
-        forwards,
-
-        vivirCorazon
-        5.5s
-        ease-in-out
-        infinite;
+        },
+        300
+    );
 }
 
 
-    /* =========================================
-       TÍTULO MÓVIL
-    ========================================= */
+function crearParticulasCorazon(
+    x,
+    y
+) {
 
-    .titulo-cumpleanos {
-        position: relative;
+    /*
+        Cantidad moderada para que
+        funcione bien en celular.
+    */
 
-        top: auto;
-        left: auto;
+    const cantidad =
+        24;
 
-        transform: none;
 
-        width: 100%;
+    for (
+        let i = 0;
+        i < cantidad;
+        i++
+    ) {
 
-        display: flex;
-        flex-wrap: wrap;
+        const particula =
+            document.createElement(
+                "span"
+            );
 
-        justify-content: center;
 
-        gap: 1px;
+        particula.classList.add(
+            "particula-corazon"
+        );
 
-        margin:
-            0 auto 55px;
 
-        padding: 0;
+        /*
+            Algunas partículas serán
+            corazones llenos y otras
+            pequeños puntos.
+        */
 
-        font-size: 29px;
+        if (
+            Math.random() < 0.78
+        ) {
 
-        line-height: 1.1;
+            particula.textContent =
+                "♥";
 
-        white-space: normal;
+        } else {
 
-        text-align: center;
+            particula.textContent =
+                "•";
+        }
+
+
+        particula.style.left =
+            `${x}px`;
+
+
+        particula.style.top =
+            `${y}px`;
+
+
+        /*
+            Dirección circular.
+
+            Cada partícula recibe
+            un ángulo diferente.
+        */
+
+        const angulo =
+            Math.random()
+            *
+            Math.PI
+            *
+            2;
+
+
+        /*
+            Distancia distinta para
+            que la explosión no forme
+            un círculo perfecto.
+        */
+
+        const distancia =
+            55
+            +
+            Math.random() * 105;
+
+
+        const destinoX =
+            Math.cos(angulo)
+            *
+            distancia;
+
+
+        /*
+            Añadimos caída hacia abajo.
+
+            Esto hace que después de
+            explotar parezca confeti.
+        */
+
+        const destinoY =
+            Math.sin(angulo)
+            *
+            distancia
+            +
+            55;
+
+
+        particula.style.setProperty(
+            "--destino-x",
+            `${destinoX}px`
+        );
+
+
+        particula.style.setProperty(
+            "--destino-y",
+            `${destinoY}px`
+        );
+
+
+        /*
+            Giro individual.
+        */
+
+        const giro =
+            -240
+            +
+            Math.random() * 480;
+
+
+        particula.style.setProperty(
+            "--giro",
+            `${giro}deg`
+        );
+
+
+        /*
+            Duración ligeramente diferente.
+        */
+
+        const duracion =
+            0.85
+            +
+            Math.random() * 0.65;
+
+
+        particula.style.setProperty(
+            "--duracion",
+            `${duracion}s`
+        );
+
+
+        /*
+            Tamaños diferentes.
+        */
+
+        const tamano =
+            8
+            +
+            Math.random() * 13;
+
+
+        particula.style.fontSize =
+            `${tamano}px`;
+
+
+        /*
+            Color individual.
+        */
+
+        particula.style.color =
+            coloresConfeti[
+                Math.floor(
+                    Math.random()
+                    *
+                    coloresConfeti.length
+                )
+            ];
+
+
+        capaConfeti.appendChild(
+            particula
+        );
+
+
+        /*
+            Eliminamos la partícula
+            cuando termina.
+
+            Así no acumulamos cientos
+            de elementos invisibles.
+        */
+
+        setTimeout(
+            () => {
+
+                particula.remove();
+
+            },
+            (duracion * 1000) + 100
+        );
     }
+}
 
 
-    .espacio-titulo {
-        width: 10px;
+/* =====================================================
+   CLIC / TOUCH
+===================================================== */
+
+/*
+    pointerdown funciona con:
+
+    - mouse
+    - pantalla táctil
+    - stylus
+
+    Por eso no necesitamos registrar
+    click y touchstart por separado.
+*/
+
+document.addEventListener(
+    "pointerdown",
+    (evento) => {
+
+        /*
+            Evitamos dispararlo cuando
+            en el futuro se pulse el
+            botón de la sorpresa.
+        */
+
+        if (
+            evento.target.closest(
+                "#boton-sorpresa"
+            )
+        ) {
+            return;
+        }
+
+
+        explosionCorazones(
+            evento.clientX,
+            evento.clientY
+        );
     }
+);
 
+botonSorpresa.addEventListener(
+    "click",
+    () => {
 
-    /* =========================================
-       MENSAJE MÓVIL
-    ========================================= */
+        window.location.href =
+            "felicitacion.html";
 
-    .mensaje-cumpleanos {
-        position: relative;
-
-        top: auto;
-        left: auto;
-
-        transform: none;
-
-        width: 88%;
-
-        margin:
-            0 auto;
-
-        text-align: center;
     }
+);
+
+/* =====================================================
+   MENSAJE DE ESPERA POR BLOQUES
+===================================================== */
+
+const bloquesEspera =
+    document.querySelectorAll(
+        ".bloque-espera"
+    );
 
 
-    .bloque-mensaje {
-        margin-bottom: 20px;
+function mostrarMensajeEspera() {
 
-        font-size: 15px;
+    /*
+        Dejamos que primero cargue
+        visualmente la escena.
+    */
 
-        line-height: 1.5;
-    }
-
-
-    .cierre-mensaje {
-        margin-top: 28px;
-
-        margin-bottom: 8px;
-
-        font-size: 18px;
-    }
-
-
-    .firma-mensaje {
-        margin-bottom: 0;
-
-        font-size: 17px;
-    }
-
-
-    /* =========================================
-       CIERRE FINAL MÓVIL
-    ========================================= */
-
-    .cierre-cumpleanos {
-        position: relative;
-
-        left: auto;
-        right: auto;
-
-        top: auto;
-        bottom: auto;
-
-        width: 88%;
-
-        margin:
-            70px auto 80px;
-
-        opacity: 0;
-
-        transform:
-            translateY(20px);
-
-        text-align: center;
-    }
-
-
-    .cierre-cumpleanos p {
-        font-size: 19px;
-
-        line-height: 1.35;
-    }
+    const esperaInicial =
+        700;
 
 
     /*
-        En móvil aparece y SE QUEDA.
-
-        No usamos la animación de
-        desaparición del escritorio.
+        Cada nuevo bloque aparece
+        después del anterior.
     */
 
-    .cierre-cumpleanos.visible {
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-        animation: none;
-
-        transition:
-            opacity 0.9s ease,
-            transform 0.9s ease;
-    }
+    const tiempoEntreBloques =
+        1700;
 
 
-    /* =========================================
-       DESTELLOS
-    ========================================= */
+    bloquesEspera.forEach(
+        (bloque, indice) => {
 
-    .capa-destellos {
-        position: fixed;
-
-        inset: 0;
-
-        width: 100%;
-        height: 100%;
-
-        overflow: hidden;
-    }
+            const retraso =
+                esperaInicial
+                +
+                indice
+                *
+                tiempoEntreBloques;
 
 
-    /* =========================================
-       CELEBRACIÓN
-    ========================================= */
+            setTimeout(
+                () => {
 
-    .capa-celebracion {
-        position: fixed;
+                    bloque.classList.add(
+                        "visible"
+                    );
 
-        inset: 0;
+                },
+                retraso
+            );
+        }
+    );
+}
 
-        width: 100%;
-        height: 100%;
 
-        overflow: hidden;
+mostrarMensajeEspera();
+
+/* =====================================================
+   CIERRE DE LA PÁGINA 1
+===================================================== */
+
+const contadorTituloFinal =
+    document.getElementById(
+        "contador-titulo-final"
+    );
+
+const celebracionTarjeta =
+    document.getElementById(
+        "celebracion-tarjeta"
+    );
+
+
+function lanzarExplosionTarjeta() {
+
+    const simbolos = [
+        "♥",
+        "✨",
+        "★",
+        "✦",
+        "•"
+    ];
+
+    const colores = [
+        "#ff4f8b",
+        "#ffd166",
+        "#ffffff",
+        "#ff9ed2",
+        "#a98bff",
+        "#7ee7ff"
+    ];
+
+    const cantidad =
+        75;
+
+
+    for (
+        let i = 0;
+        i < cantidad;
+        i++
+    ) {
+
+        const particula =
+            document.createElement(
+                "span"
+            );
+
+        particula.classList.add(
+            "particula-tarjeta"
+        );
+
+        particula.textContent =
+            simbolos[
+                Math.floor(
+                    Math.random()
+                    *
+                    simbolos.length
+                )
+            ];
+
+        particula.style.setProperty(
+            "--x",
+            `${Math.random() * 100}%`
+        );
+
+        particula.style.setProperty(
+            "--tamano",
+            `${
+                8
+                +
+                Math.random() * 14
+            }px`
+        );
+
+        particula.style.setProperty(
+            "--color",
+            colores[
+                Math.floor(
+                    Math.random()
+                    *
+                    colores.length
+                )
+            ]
+        );
+
+        const duracion =
+            2.2
+            +
+            Math.random() * 1.8;
+
+        particula.style.setProperty(
+            "--duracion",
+            `${duracion}s`
+        );
+
+        particula.style.setProperty(
+            "--altura",
+            `${
+                -180
+                -
+                Math.random() * 260
+            }px`
+        );
+
+        particula.style.setProperty(
+            "--desplazamiento",
+            `${
+                -70
+                +
+                Math.random() * 140
+            }px`
+        );
+
+        particula.style.setProperty(
+            "--giro",
+            `${
+                -240
+                +
+                Math.random() * 480
+            }deg`
+        );
+
+        celebracionTarjeta.appendChild(
+            particula
+        );
+
+        setTimeout(
+            () => {
+                particula.remove();
+            },
+            (duracion * 1000) + 200
+        );
     }
 }
+
+
+/*
+    Tus bloques aparecen cada 1.7 s.
+    Con 5 bloques:
+
+    0.7
+    2.4
+    4.1
+    5.8
+    7.5
+
+    Entonces mostramos el título después.
+*/
+
+setTimeout(
+    () => {
+
+        contadorTituloFinal.classList.add(
+            "visible"
+        );
+
+    },
+    9200
+);
+
+
+/*
+    Y poco después lanzamos la celebración.
+*/
+
+setTimeout(
+    lanzarExplosionTarjeta,
+    10300
+);
