@@ -175,7 +175,9 @@ const capaEstrellas =
 function crearEstrellas() {
 
     const cantidad =
-        65;
+    window.innerWidth <= 800
+        ? 28
+        : 65;
 
 
     for (
@@ -384,11 +386,9 @@ if (esCelular) {
 
 
     frase.style.fontSize =
-        `${
-            13
-            +
-            Math.random() * 8
-        }px`;
+    window.innerWidth <= 800
+        ? `${11 + Math.random() * 3}px`
+        : `${13 + Math.random() * 8}px`;
 
 
     const duracion =
@@ -493,7 +493,10 @@ function crearCorazonesArbol() {
     const namespace =
         "http://www.w3.org/2000/svg";
 
-    const cantidad = 750;
+     const cantidad =
+        window.innerWidth <= 800
+            ? 260
+            : 750;
 
     let creados = 0;
 
@@ -665,9 +668,14 @@ crearEstrellas();
 
 crearEstrellaFugaz();
 
+const intervaloEstrellaFugaz =
+    window.innerWidth <= 800
+        ? 4000
+        : 2000;
+
 setInterval(
     crearEstrellaFugaz,
-    2000
+    intervaloEstrellaFugaz
 );
 
 
@@ -676,9 +684,15 @@ setTimeout(
     700
 );
 
+const intervaloFrases =
+    window.innerWidth <= 800
+        ? 5000
+        : 3000;
+
+
 setInterval(
     crearFraseCayendo,
-    3000
+    intervaloFrases
 );
 
 
